@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=si" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+<title>Samsung Plus</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" href="js/animate.min.css" />
+<link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+<link href="css/uli.css" media="all" rel="stylesheet" type="text/css" />
+<style>
+.cargador{
+	/*background-color: black;*/
+	background: url(image/cargando.png) center center / cover no-repeat fixed;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 3;
+}
+</style>
+<script type="text/javascript">
+$(document).load(function() {
+$(".cargador").css("display","block");
+});
+$(document).ready(function(){
+
+	$(".cargador").fadeOut();
+	var color= localStorage.color;
+	$(".padre_catalogo").css("background-color",color);
+});
+</script>
+</head>
+
+<body class="body_catalogo">
+	<div style="pointer-events:none;" class="degradado_top"></div>
+	<!--HEADER-->
+	<div class="ul_header">
+		<div class="ul_lado_left">
+			<img onclick="app.showMenu();" src="image/menu_bar.png" class="ul_img_bar"/>
+			<img src="image/logo_samsung.png" class="ul_logo"/>
+		</div>
+		<div class="ul_lado_right">
+			<a style="text-decoration:none;" href="mis_puntos_connect.html"><span class="ul_puntos">Mis puntos</span>
+			<span class="ul_pn_num"></span></a>
+		</div>
+	</div>
+	<!--// HEADER-->
+
+	<!--CONTENIDO-->
+	<div class="cargador">
+</div>
+	<div class="padre_catalogo">
+		<div class="hijo_catalogo" style="padding-bottom: 100px;">
+			<div class="ul_encabezado">
+				<div class="ul_int_enca">
+					<img src="image/canjes_active.png" class="ul_regalo"/>
+					<span class="txt_recompensas">Mis canjes</span>
+				</div>
+				<div class="ul_int_enca_dos">
+					<a href="carrito.html">
+					<div style="background-color: yellow; border-radius: 6px; position: absolute;width: 12px;height:12px;right: 3%;" id="n_productos">
+						<div class="circulo_carrito" id="n_productos">
+						<div style="font-size:12px; text-align:center;" id="text_n_productos"></div>
+						</div>
+					</div>
+					<img src="image/carro.png" class="ul_regalo"/>
+					</a>
+				</div>
+			</div>
+			<div class="select_cat_uli">
+				<div class="select_uno_uno">
+					<select class="selecr_uli" id="select_cat">
+						<option>Categorías</option>
+					</select>
+				</div>
+				<div class="select_uno_dos">
+					<select class="selecr_uli" id="selct_order" >
+						<option value="0" style="color: black">Ordenar por</option>
+						<option value="1" style="color: black">Puntos</option>
+						<option value="2" style="color: black">Fecha</option>
+					</select>
+				</div>
+			</div>
+			<div id="contenedor_canjes">
+				<!--<div style="background: white; border-radius: 5px; font-family: SamsungSharpSans_bold; font-size: 14px; display:flex; margin-bottom:10px;">
+					<div style="width: 40%; ">
+						<img src="https://www.nintendo.com/switch/etRgxnAu0zRX4bmWnt9K628wG7YQUI6t/images/switch/home/video-thumb-6.jpg" width="100%;">
+					</div>
+					<div style="width: 60%;  display:flex; align-items: center; justify-content: center; flex-direction: column; overflow: hidden;">
+						<div>
+						<div style="text-align: center;">Nintendo Switch</div>
+						<a href="desc_prod.html"><button type="button" class="selecr_uli" style="border-color: grey; margin-top: 5px;">Ver más</button></a>
+						</div>
+					</div>
+				</div>
+
+				<div style="background: white; border-radius: 5px; font-family: SamsungSharpSans_bold; font-size: 14px; display:flex; margin-bottom:10px;">
+					<div style="width: 40%; ">
+						<img src="https://www.nintendo.com/switch/etRgxnAu0zRX4bmWnt9K628wG7YQUI6t/images/switch/home/video-thumb-6.jpg" width="100%;">
+					</div>
+					<div style="width: 60%;  display:flex; align-items: center; justify-content: center; flex-direction: column; overflow: hidden;">
+						<div>
+						<div style="text-align: center;">Nintendo Switch</div>
+						<a href="desc_prod.html"><button type="button" class="selecr_uli" style="border-color: grey; margin-top: 5px;">Ver más</button></a>
+						</div>
+					</div>
+				</div>
+
+				<div style="background: white; border-radius: 5px; font-family: SamsungSharpSans_bold; font-size: 14px; display:flex; margin-bottom:10px;">
+					<div style="width: 40%; display: flex; align-items: center; justify-content: center;">
+						<img src="https://www.nintendo.com/switch/etRgxnAu0zRX4bmWnt9K628wG7YQUI6t/images/switch/home/video-thumb-6.jpg" width="100%;">
+					</div>
+					<div style="width: 60%;  display:flex; align-items: center; justify-content: center; flex-direction: column; overflow: hidden;">
+						<div>
+						<div style="text-align: center;">Nintendo Switch</div>
+						<a href="desc_prod.html"><button type="button" class="selecr_uli" style="border-color: grey; margin-top: 5px;">Ver más</button></a>
+						</div>
+					</div>
+				</div>
+
+				<div style="background: white; border-radius: 5px; font-family: SamsungSharpSans_bold; font-size: 14px; display:flex; margin-bottom:10px;">
+					<div style="width: 40%; ">
+						<img src="https://www.nintendo.com/switch/etRgxnAu0zRX4bmWnt9K628wG7YQUI6t/images/switch/home/video-thumb-6.jpg" width="100%;">
+					</div>
+					<div style="width: 60%;  display:flex; align-items: center; justify-content: center; flex-direction: column; overflow: hidden;">
+						<div>
+						<div style="text-align: center;">Nintendo Switch</div>
+						<a href="desc_prod.html"><button type="button" class="selecr_uli" style="border-color: grey; margin-top: 5px;">Ver más</button></a>
+						</div>
+					</div>
+				</div>-->
+			</div>
+		</div>
+	</div>
+	<!--//CONTENIDO-->
+
+	<!--FOOTER-->
+	<div class="ul_footer">
+		<div class="ul_foot_uno">
+		 	<img onclick="regalo();" src="image/regalo_inact.png" class="ul_img_bar"/>
+			<p class="txt_footer_ul inactive_footer">Recompensas</p>
+		</div>
+		<div class="ul_foot_dos">
+		 	<img onclick="puntos();" src="image/dos_circulos_ac.png" class="ul_img_bar"/>
+			<p class="txt_footer_ul inactive_footer">Mis puntos</p>
+		</div>
+		<div class="ul_foot_tres">
+		 	<img onclick="canjes();" src="image/canjes_active.png" class="ul_img_bar"/>
+			<p class="txt_footer_ul active_footer">Mis canjes</p>
+		</div>
+	</div>
+	<div class="degradado_bottom"></div>
+	<!--FOOTER-->
+	<script>
+	$( document ).ready(function() {
+		$(".ul_pn_num").text(localStorage.getItem('puntos'));
+		var id_usuario=localStorage.id_usuario;
+		if(localStorage.nProductos!=0){
+	      $("#text_n_productos").text(localStorage.nProductos);
+	      //$("#cantidad_puntos").text(localStorage.puntos);
+	     	}
+		/*$.get(
+			   "ajax/historial_canjes.php",
+			   { id_user: id_usuario },
+			   function(data){
+			   },
+			);*/
+			$("#contenedor_canjes").load("https://rest.samsungplus.mx/historial_canjes.aspx?id_user="+id_usuario);
+			$("#select_cat").load("https://rest.samsungplus.mx/categoria.aspx");
+
+	});
+	$("#select_cat").change(function(){
+		var id_usuario=localStorage.id_usuario;
+		var select_value=$("#select_cat").val();
+		if(select_value==0){
+			$("#contenedor_canjes").load("https://rest.samsungplus.mx/historial_canjes.aspx?id_user="+id_usuario);
+		}
+		else{
+			$("#contenedor_canjes").load("https://rest.samsungplus.mx/filtro_categoria.aspx?id_user="+id_usuario+"&id_categoria="+select_value);
+		}
+	});
+	$("#selct_order").change(function(){
+		var id_usuario=localStorage.id_usuario;
+		var select_value=$("#selct_order").val();
+		if(select_value==0){
+			$("#contenedor_canjes").load("https://rest.samsungplus.mx/historial_canjes.aspx?id_user="+id_usuario);
+		}
+		else{
+			$("#contenedor_canjes").load("https://rest.samsungplus.mx/order_canje.aspx?id_user="+id_usuario+"&id_order="+select_value);
+		}
+	});
+	function puntos(){
+		window.location.href = "mis_puntos_connect.html";
+	}
+	function canjes(){
+		window.location.href = "historial_canje.html";
+	}
+	function regalo(){
+		window.location.href = "catalogo.html";
+	}
+
+function oprimir_back(){
+window.location.href = "miperfil.html";
+}
+
+	</script>
+</body>
+
+</html>

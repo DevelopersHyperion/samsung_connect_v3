@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=si" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+		<title>Samsung Plus</title>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+		<link rel="stylesheet" href="js/animate.min.css" />
+		<link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+		<link href="css/uli.css" media="all" rel="stylesheet" type="text/css" />
+		<!-- jQuery library (served from Google) -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<!-- bxSlider Javascript file -->
+		<script src="js/jquery.bxslider.min.js"></script>
+		<!-- bxSlider CSS file -->
+		<link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+		<script type="text/javascript">
+		$( window ).load(function() {
+		$(".cargador").fadeOut();
+		});
+			$(document).ready(function(){
+				$('.bxslider').bxSlider({
+	  				infiniteLoop: false,
+	  				hideControlOnEnd: true
+				});
+			});
+
+			function puntos(){
+				window.location.href = "mis_puntos_connect.html";
+			}
+			function canjes(){
+				window.location.href = "historial_canje.html";
+			}
+			function regalo(){
+				window.location.href = "catalogo.html";
+			}
+			function abre(){
+					$(".pop_tabla").fadeIn();
+					$(".opacidad_rc").fadeIn();
+			}
+			function abre2(){
+					$(".pop_tabla2").fadeIn();
+					$(".opacidad_rc2").fadeIn();
+			}
+			function cerrar(){
+					$(".pop_tabla").fadeOut();
+					$(".opacidad_rc").fadeOut();
+				}
+				function cerrar2(){
+					$(".pop_tabla2").fadeOut();
+					$(".opacidad_rc2").fadeOut();
+				}
+		</script>
+	</head>
+	<div class="cargador">
+	</div>
+	<style media="screen">
+		.body_catalogo_em{
+    		background-position-y: 0!important;
+    		background-color: #fff;
+		}
+		.txt_recompensas_em{
+  			color: black;
+  			font-size: 12px;
+    		font-family: SamsungSharpSans_regular;
+    		vertical-align: bottom;
+		}
+		.ul_encabezado_em{
+  			width: 100%;
+    		border-bottom: 1px solid black;
+    		margin-top: 70px;
+		}
+		.carro_em{
+  			width: 22px;
+		}
+		.titulo_em{
+  			font-family:SamsungSharpSans_bold;
+  			color: #0073c7;
+  			font-size: 20px;
+  			margin-top: 5px;
+  			margin-bottom: 7px;
+		}
+		.slider_em{
+  			background-color: white;
+  			border-bottom: 1px solid black;
+  			width: 90%;
+  			margin: 0 auto;
+		}
+		.contenedor_texto_em{
+  			width: 90%;
+  			margin: 0 auto;
+		}
+		.sku_em{
+  			font-family: SamsungSharpSans_regular;
+  			color: black;
+  			font-size: 8px;
+  			margin-bottom: 7px;
+		}
+		.descripcion_em{
+  			font-family: SamsungSharpSans_regular;
+  			color: black;
+  			font-size: 8px;
+  			margin-bottom: 15px;
+  			text-align: justify;
+		}
+		.span_azul_em{
+  			color: #0073c7;
+  			font-weight: bold;
+		}
+		.titulo2_em{
+  			font-family:SamsungSharpSans_bold;
+  			margin-bottom: 7px;
+  			font-size: 20px;
+		}
+		.sub_titulo_em{
+  			font-family: SamsungSharpSans_regular;
+  			font-size: 13px;
+  			color: #0073c7;
+  			margin-bottom: 7px;
+  			margin-top: 15px;
+		}
+		.buttons_em{
+		  	display: flex;
+		  	width: 90%;
+		  	margin: 0 auto;
+		}
+		.bx-wrapper {
+			-moz-box-shadow: 0 0 5px #ccc;
+			-webkit-box-shadow: 0 0 5px #ccc;
+    		box-shadow: 0 0 0px #ccc;
+    		border: 0px solid #fff;
+    		background: transparent !important;
+		}
+		.bx-wrapper {
+    		position: relative;
+    		margin-bottom: 0px;
+    		padding: 0;
+    		-ms-touch-action: pan-y;
+    		touch-action: pan-y;
+		}
+		.bx-wrapper .bx-pager.bx-default-pager a:hover, .bx-wrapper .bx-pager.bx-default-pager a.active, .bx-wrapper .bx-pager.bx-default-pager a:focus {
+    		background: #00FFFF;
+		}
+		.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
+    		position: absolute;
+    		bottom: 8px;
+    		width: 100%;
+		}
+		.button_black_em{
+  			width: 55%;
+			color: #fff;
+			font-size: 12px;
+			border: 1px solid #EEEEEE;
+			background: black !important;
+			height: 28px;
+			border-radius: 30px;
+			outline: 0;
+			font-family: SamsungSharpSans;
+		}
+		.button_white_em{
+  			width: 55%;
+      		color: black;
+      		font-size: 12px;
+      		border: 1px solid #EEEEEE;
+      		background: transparent !important;
+      		height: 28px;
+      		border-radius: 30px;
+      		outline: 0;
+      		font-family: SamsungSharpSans;
+      		margin-right: 10px;
+		}
+		.bx-prev{
+			display: none;
+		}
+		.bx-next{
+			display: none;
+		}
+		.cargador{
+			/*background-color: black;*/
+			background: url(image/cargando.png) center center / cover no-repeat fixed;
+			position: fixed;
+			height: 100%;
+			width: 100%;
+			z-index: 3;
+		}
+	</style>
+	<body class="body_catalogo_em">
+		<div style="pointer-events:none;" class="degradado_top"></div>
+		<!--HEADER-->
+		<div class="ul_header">
+			<div class="ul_lado_left">
+				<img onclick="app.showMenu();"src="image/menu_bar.png" class="ul_img_bar"/>
+				<img src="image/logo_samsung.png" class="ul_logo"/>
+			</div>
+			<div class="ul_lado_right">
+				<a style="text-decoration:none;"href="mis_puntos_connect.html"><span class="ul_puntos">Mis puntos</span>
+				<span class="ul_pn_num" id="cantidad_puntos"></span></a>
+			</div>
+		</div>
+
+		<div class="opacidad_rc" onclick="cerrar()" style="display: none;">
+			<div class="pop_tabla" onclick="cerrar()" style="display: none;">
+				<button class="cierra_pop_carrito">x</button>
+				<p class="parrafo_carrito_pop">Este producto ya fue agregado al carrito</b></p>
+			</div>
+		</div>
+
+		<div class="opacidad_rc2" onclick="cerrar2()" style="display: none;">
+			<div class="pop_tabla2" onclick="cerrar2()" style="display: none;">
+				<button class="cierra_pop_carrito2">x</button>
+				<p style="text-align:center;"class="parrafo_carrito_pop">Su producto fue agregado correctamente al carrito.</b></p>
+			</div>
+		</div>
+		<!--// HEADER-->
+
+		<!--CONTENIDO-->
+		<div style="padding-bottom: 100px;" class="padre_catalogo">
+			<div class="hijo_catalogo">
+				<div class="ul_encabezado_em">
+					<div class="ul_int_enca">
+						<span class="txt_recompensas_em">Detalle de producto</span>
+					</div>
+
+					<div class="ul_int_enca_dos">
+						<a href="carrito.html">
+							<div class="circulo_carrito" id="n_productos">
+								<div class="font_carrito" id="text_n_productos"></div>
+							</div>
+		        			<img src="image/carro_negro.png" class="carro_em">
+	        			</a>
+					</div>
+				</div>
+			</div>
+
+			<div id="carga_images">
+    		</div>
+    		<!-- Se creán los divs correspondientes al producto -->
+    		<div class="contenedor_texto_em" id="inf_prod">
+    		</div>
+
+    		<div class="buttons_em">
+      			<button onclick="canjear();" class="button_white_em"type="button">Canjear ya</button>
+      			<button class="button_black_em" type="button" id="agregar_carrito">Agregar al carrito</button>
+    		</div>
+		</div>
+		<!--//CONTENIDO-->
+
+		<!--FOOTER-->
+		<div class="ul_footer">
+			<div class="ul_foot_uno">
+			 	<img onclick="regalo();" src="image/regalo_inact.png" class="ul_img_bar"/>
+				<p class="txt_footer_ul inactive_footer">Recompensas</p>
+			</div>
+			<div class="ul_foot_dos">
+			 	<img onclick="puntos();" src="image/dos_circulos_ac.png" class="ul_img_bar"/>
+				<p class="txt_footer_ul inactive_footer">Mis puntos</p>
+			</div>
+			<div class="ul_foot_tres">
+			 	<img onclick="canjes();"src="image/compu_ac.png" class="ul_img_bar"/>
+				<p class="txt_footer_ul active_footer">Mis canjes</p>
+			</div>
+		</div>
+		<div class="degradado_bottom"></div>
+		<!--FOOTER-->
+
+  		<script type="text/javascript">
+    		//GET URL PARAMETERS
+		    $.urlParam = function(name){
+		       var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+		       	if (results==null){
+		       		return null;
+		       	}
+		       	else{
+		       		return decodeURI(results[1]) || 0;
+		       	}
+		    }
+
+    		var id_producto=$.urlParam('id_producto');
+				var boleto =$.urlParam('boleto');
+    		localStorage.prodid = 'id_producto='+id_producto;
+    		var urlLoad= "https://rest.samsungplus.mx/slider.aspx?"+localStorage.prodid+"&boleto="+boleto;
+	        $("#carga_images").load(urlLoad);
+
+    		$(document).ready(function() {
+    			$("#cantidad_puntos").text(localStorage.puntos);
+      			if(localStorage.nProductos!=0){
+      				$("#text_n_productos").text(localStorage.nProductos);
+      			}
+      			if(!isNaN(id_producto)){
+        			$.get(
+          				"https://rest.samsungplus.mx/service.aspx",
+          				{id_pro: id_producto,tipo: "3",boleto:boleto},
+									 // put your parameters here
+            			function(data){
+              				var list_images= JSON.parse(data);
+              				$.get(
+                				"https://rest.samsungplus.mx/service.aspx",
+                				{id_pro: id_producto,tipo: "4",boleto:boleto},
+												 // put your parameters here
+                  				function(info_producto){
+                    				// console.log(info_producto);
+                    				var datos_list = JSON.parse(info_producto);
+                    				console.log(datos_list);
+                    				$('#inf_prod').append('<div class="titulo_em">'+datos_list[0]["nombre"]+'</div>');
+                    				$('#inf_prod').append('<div class="sku_em">'+datos_list[0]["sku"]+'</div>');
+
+                    				if(datos_list[0]["id_status_producto"]==2){
+                    					$('#inf_prod').append('<div class="titulo2_em"><span class="span_azul_em">'+datos_list[0]["puntos_necesarios"]+' | </span>Bajo pedido*</div>');
+                    					$('#inf_prod').append('<div class="sku_em">*Los productos bajo pedidos están sujetos a disponibilidad del </div>');
+                    				}
+
+                    				else{
+                    					$('#inf_prod').append('<div class="titulo2_em"><span class="span_azul_em">'+datos_list[0]["puntos_necesarios"]+' | </span>En stock</div>');
+                    				}
+
+                    				$('#inf_prod').append('<div class="sub_titulo_em">Descripción</div>');
+                    				$('#inf_prod').append('<div class="descripcion_em">'+datos_list[0]["descripcion"]+'</div>');
+                  				}
+              				);
+            			}
+        			);
+      			}
+    		});
+
+    		$("#agregar_carrito").click(function(){
+    			if(localStorage.nProductos>=1){
+  					var id_prods  = localStorage.productos.split(',');
+  					id_prods.forEach(function (item) {
+  						if(Number(item) == id_producto){
+  							localStorage.validacion = 1;
+  						}
+					})
+					if(localStorage.validacion!=1){
+						if(localStorage.productos){
+							if (boleto==1) {
+								localStorage.productos = localStorage.productos + "," + id_producto+"-b";
+							}else{
+								localStorage.productos = localStorage.productos + "," + id_producto;
+							}
+
+			    			localStorage.nProductos = Number(localStorage.nProductos) + 1;
+		    			}
+	    				else{
+								if(boleto==1){
+									localStorage.productos =id_producto+"-b";
+								}else{
+									localStorage.productos = id_producto;
+								}
+
+		    				localStorage.nProductos = 1;
+		    			}
+							abre2();
+		    			$("#text_n_productos").text(localStorage.nProductos);
+
+		    			console.log("abre2");
+					}
+					else{
+						abre();
+						localStorage.validacion = 0;
+					}
+  				}
+  				else{
+						if(boleto==1){
+							localStorage.productos =id_producto+"-b";
+						}else{
+							localStorage.productos = id_producto;
+						}
+
+	    			localStorage.nProductos = 1;
+						abre2();
+	    			$("#text_n_productos").text(localStorage.nProductos);
+
+	    			console.log("abre2");
+  				}
+    		});
+
+			function canjear(){
+				if(localStorage.nProductos>=1){
+  					var id_prods  = localStorage.productos.split(',');
+  					id_prods.forEach(function (item) {
+  						if(Number(item) == id_producto){
+  							localStorage.validacion = 1;
+  						}
+					})
+					if(localStorage.validacion!=1){
+						if(localStorage.productos){
+							if (boleto==1) {
+								localStorage.productos = localStorage.productos + "," + id_producto+"-b";
+							}else{
+								localStorage.productos = localStorage.productos + "," + id_producto;
+							}
+
+	    					localStorage.nProductos = Number(localStorage.nProductos) + 1;
+	    				}
+					}
+					else{
+						window.location.href = "carrito.html";
+					}
+				}
+				else{
+					if(boleto==1){
+						localStorage.productos = id_producto+"-b";
+					}else{
+						localStorage.productos = id_producto;
+					}
+					localStorage.nProductos = 1;
+				}
+    			window.location.href = "carrito.html";
+    		}
+
+        function oprimir_back(){
+           window.location.href = "catalogo.html";
+        }
+
+  		</script>
+	</body>
+</html>

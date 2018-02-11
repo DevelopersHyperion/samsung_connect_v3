@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- jQuery library (served from Google) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="js/jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+    <style>
+        .bx-wrapper {
+            -moz-box-shadow: 0 0 5px transparent !important;
+            -webkit-box-shadow: 0 0 5px transparent !important;
+            box-shadow: 0 0 5px transparent !important;
+            border: 5px solid transparent !important;
+            background: transparent !important;
+        }
+
+        .no_contestada{
+            width: 8px;
+            height: 8px;
+            border-radius: 20px;
+            border: 1px solid #aaaaaa;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .correcta{
+            width: 8px;
+            height: 8px;
+            border-radius: 20px;
+            border: 1px solid #034ea2;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: inline-block;
+            background: #034ea2;
+        }
+
+        .incorrecta{
+            width: 8px;
+            height: 8px;
+            border-radius: 20px;
+            border: 1px solid #FF00FF;
+            margin: 0 auto;
+            margin-top: 20px;
+            display: inline-block;
+            background: #FF00FF;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <!-- <script>
+        $(document).ready(function(){
+          $('.bxslider').bxSlider({
+            slideWidth: 250,
+            minSlides: 1,
+            maxSlides: 2,
+            slideMargin: 10
+          });
+        });
+    </script> -->
+</head>
+
+<body>
+<div id="popup" class="contenedor_popup">
+    <div class="contenedor_popup_blanco">
+        <div>
+            <div style="font-family: SamsungSharpSans_bold; margin-bottom: 15px; ">¿Estás seguro que deseas salir?</div>
+            <div onclick="a_academy();" class="boton_popup">Aceptar</div>
+            <div onclick="dismiss();" class="boton_popup">Cancelar</div>
+        </div>
+    </div>
+</div>
+<div class="opacidad_rc_canje" onclick="cerrar_canje()" style="display: none;text-align: center;">
+    <div class="pop_tabla_canje" onclick="cerrar_canje()" style="display: none;height: 35%;">
+        <button class="cierra_pop_carrito">x</button>
+        <!-- <p class="pop_carrito_title">BORRAR</p> -->
+        <p class="parrafo_carrito_pop">Tu respuesta no fue correcta</p>
+    </div>
+</div>
+<div class="contenido_home_encuesta"></div>
+
+<div class="cont_encuesta">
+
+    <div class="image_enc">
+        <img src='image/logo_uno.png' width='15'/>
+    </div>
+    <div class="image_text">
+        <p class="txtto" id="titulo"></p>
+    </div>
+
+    <div class="contenedor_encuesta">
+        <h1 id="pregunta"></h1>
+        <img src="" id="imagen_pregunta"/>
+
+        <div class="respuestas">
+            <div class="form-field_uno">
+                <input type="radio" name="res_uno" value="1" id="input_1"/>
+            </div>
+
+            <div class="form-field_dos">
+                <label for="option1" id="respuesta_1" ></label>
+            </div>
+        </div>
+
+        <div class="respuestas">
+            <div class="form-field_uno">
+                <input type="radio" name="res_uno" value="2"/>
+            </div>
+
+            <div class="form-field_dos">
+                <label for="option1" id="respuesta_2" ></label>
+            </div>
+        </div>
+
+        <div class="respuestas">
+            <div class="form-field_uno">
+                <input type="radio" name="res_uno" value="3"/>
+            </div>
+
+            <div class="form-field_dos">
+                <label for="option1" id="respuesta_3" ></label>
+            </div>
+        </div>
+
+        <div class="respuestas">
+            <div class="form-field_uno">
+                <input type="radio" name="res_uno" value="4"/>
+            </div>
+
+            <div class="form-field_dos">
+                <label for="option1" id="respuesta_4" ></label>
+            </div>
+        </div>
+        <div id="circulos"></div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+        function a_academy(){
+            window.location.href = "academy.html";
+        }
+
+        function dismiss(){
+        $('#popup').css("display", "none");
+        }
+
+        function oprimir_back(){
+            $('#popup').css("display", "flex");
+        }
+        //POP ERROR
+        //POP CANJE
+        function abrir_canje(){
+            $(".pop_tabla_canje").fadeIn();
+            $(".opacidad_rc_canje").fadeIn();
+        }
+        function cerrar_canje(){
+            $(".pop_tabla_canje").fadeOut();
+            $(".opacidad_rc_canje").fadeOut();
+        }
+
+        function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+          return pair[1];
+        }
+      }
+    }
+
+        $(document).ready(function() {
+            if(localStorage.getItem("id_usuario")==null){
+                window.location.href = "login.html";
+            }
+            var aciertos=0;
+            var preguntas_totales;
+            // var id_capacitacion = localStorage.getItem("id_capacitacion");
+            var id_capacitacion =getQueryVariable("id");
+            var id_usuario = localStorage.getItem("id_usuario");
+            //var id_usuario = 1;
+            var id_pregunta = 1;
+            var pregunta_mal = true;
+
+            $.ajax({
+                url:"https://rest.samsungplus.mx/service.aspx?tipo=8&id_capacitacion=" + id_capacitacion,
+                success: function(data){
+                    var preguntas_numero = data;
+                    preguntas_totales = data;
+                    for(i = 1; i <= data; i++){
+
+                        //invertimos el orden de los resultados
+                        var contador_actual = preguntas_numero - i + 1;
+                       $( "<div class='no_contestada' style='margin-right:2px;' id='circulo_" + contador_actual + "'></div>" ).insertAfter( "#circulos" );
+                    }
+                }
+             });
+            $.ajax({
+                url:"https://rest.samsungplus.mx/service.aspx?tipo=9&id_capacitacion=" + id_capacitacion,
+                success: function(data){
+                    var titulo = JSON.parse(data);
+                    $('#titulo').html("Examen - " + titulo.titulo);
+
+                }
+             });
+
+            $.ajax({
+                url:"https://rest.samsungplus.mx/service.aspx?tipo=10&pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion,
+                success: function(data){
+                    var pregunta = JSON.parse(data);
+                    $('#pregunta').html(pregunta.pregunta);
+                    $('#respuesta_1').html(pregunta.respuesta_1);
+                    $('#respuesta_2').html(pregunta.respuesta_2);
+                    $('#respuesta_3').html(pregunta.respuesta_3);
+                    $('#respuesta_4').html(pregunta.respuesta_4);
+                    $('#imagen_pregunta').attr("src", "https://panel.samsungplus.mx/image_academy/media_cursos/" + pregunta.imagen);
+                }
+             });
+
+
+
+
+            //Al oprimir cambio
+            $('input[type=radio][name=res_uno]').change(function() {                
+                var respuesta_contestada = this.value;
+                $('input[type=radio][name=res_uno]').prop('disabled', true);
+                //Verifica resultado
+                pregunta_mal = true;
+                $.ajax({
+                    url:"https://rest.samsungplus.mx/service.aspx?tipo=13&respuesta=" + respuesta_contestada + "&id_pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion,
+                    success: function(data){
+
+                        var solucion = JSON.parse(data);
+                        if(solucion.solucion == 1){
+                            var nuevo_id_pregunta = id_pregunta - 1;
+                            $('#circulo_' + nuevo_id_pregunta).attr('class', 'correcta');
+                            aciertos=aciertos+1;
+                            pregunta_mal = false; 
+                        }else if(solucion.solucion == 0){
+                            var nuevo_id_pregunta = id_pregunta - 1;
+                            pregunta_mal = true;                            
+                            $('#circulo_' + nuevo_id_pregunta).attr('class', 'incorrecta');
+                            //POP CANJE
+                            abrir_canje();
+
+                        }
+                    }
+                });
+
+
+                id_pregunta = id_pregunta + 1;
+
+                if(id_pregunta > preguntas_totales){
+                    if(pregunta_mal == true){
+                        //localStorage.setItem("aprovado", "0");                        
+                    }else{
+                        aciertos=aciertos+1;
+                        //localStorage.setItem("aprovado", "1");                        
+                    }
+                    console.log("porcentaje:"+(aciertos/preguntas_totales));
+                    var porcentaje=aciertos/preguntas_totales;
+                    console.log(porcentaje);
+                    if(porcentaje>=0.7){
+                        localStorage.setItem("aprovado", "1");
+                        $.ajax({
+                            url:"https://rest.samsungplus.mx/service.aspx?tipo=14&id_capacitacion=" + id_capacitacion + "&id_usuario=" + id_usuario,
+                            success: function(data){
+                            localStorage.puntos=parseInt(localStorage.puntos)+parseInt(data);
+                            localStorage.puntos_curso=data;
+                            }
+                         });
+                    }
+                    else{
+                        localStorage.setItem("aprovado", "0");
+                        $.ajax({
+                            url:"https://rest.samsungplus.mx/service.aspx?tipo=28&id_capacitacion=" + id_capacitacion + "&id_usuario=" + id_usuario,
+                            success: function(data){
+                            console.log("done");
+                            }
+                        });
+                    }
+                    $.ajax({
+                        url:"https://rest.samsungplus.mx/service.aspx?tipo=26&id_capacitacion=" + id_capacitacion + "&id_usuario=" + id_usuario+"&porcentaje="+porcentaje,
+                        success: function(data){ 
+                            window.location.replace("gano.html");
+                        }
+                    });
+                }
+                 //Recarga la siguente pregunta
+                else{
+              console.log("https://rest.samsungplus.mx/service.aspx?tipo=15&pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion);
+                $.ajax({
+                    url:"https://rest.samsungplus.mx/service.aspx?tipo=10&pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion,
+                    success: function(data){
+                        var pregunta = JSON.parse(data);
+                        $('#pregunta').html(pregunta.pregunta);
+                        $('#respuesta_1').html(pregunta.respuesta_1);
+                        $('#respuesta_2').html(pregunta.respuesta_2);
+                        $('#respuesta_3').html(pregunta.respuesta_3);
+                        $('#respuesta_4').html(pregunta.respuesta_4);
+                        $('#imagen_pregunta').attr("src", "https://panel.samsungplus.mx/image_academy/media_cursos/" + pregunta.imagen);
+                        //var nuevo_id_pregunta = id_pregunta - 1;
+                        //$('#circulo_' + nuevo_id_pregunta).attr('class', 'correcta');
+                        //id_pregunta = id_pregunta + 1;
+                        $('input[type=radio][name=res_uno]').prop('disabled', false);
+                    }
+                 });
+                }
+
+                $(this).prop('checked', false);
+                // if (this.value == '1') {
+                //     alert("Respuesta 1");
+                // }else if (this.value == '2') {
+                //     alert("Respuesta 2");
+                // }else if(this.value == '3'){
+                //     alert("Respuesta 3");
+                // }else if(this.value == '4'){
+                //     alert("Respueta 4");
+                // }
+            });
+        });
+function salir(){
+        window.localStorage.clear();
+        window.location.href = "login.html";
+    }
+    </script>
+</body>
+</html>

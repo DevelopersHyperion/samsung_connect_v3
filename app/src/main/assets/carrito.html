@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=si" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<title>Samsung Plus</title>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="js/animate.min.css" />
+	<link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="css/uli.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+<div class="cargador">
+</div>
+<style>
+.cargador{
+	/*background-color: black;*/
+	background: url(image/cargando.png) center center / cover no-repeat fixed;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 3;
+}
+</style>
+<body class="body_catalogo">
+<div class="degradado_top"></div>
+<!--HEADER-->
+<div class="ul_header">
+	<div class="ul_lado_left">
+		<img onclick="app.showMenu();" src="image/menu_bar.png" class="ul_img_bar"/>
+		<img src="image/logo_samsung.png" class="ul_logo"/>
+	</div>
+	<div class="ul_lado_right">
+		<a style="text-decoration:none;" href="mis_puntos_connect.html"><span class="ul_puntos">Mis puntos</span>
+			<span class="ul_pn_num"></span></a>
+	</div>
+</div>
+<div class="opacidad_rc" onclick="cerrar()" style="display: none;">
+	<div class="pop_tabla" onclick="cerrar()" style="display: none;text-align: center;height: 50%;">
+		<button class="cierra_pop_carrito">x</button>
+		<p class="pop_carrito_title">NO CUENTAS CON LOS PUNTOS SUFICIENTES</p>
+		<p class="parrafo_carrito_pop">Para adquirir más puntos te recomendamos realizar los cursos y capacitaciones que podrás encontrar en el apartado de Samsung Academy.</p>
+		<button class="canjear_carrito_pop" onclick="academy()">Ir a Samsung Academy</button>
+	</div>
+</div>
+<!--POP UP/BORRAR-->
+<div class="opacidad_rc_borrar" onclick="cerrar_borrar()" style="display: none;text-align: center;">
+	<div class="pop_tabla_borrar" onclick="cerrar_borrar()" style="display: none;height: 35%;">
+		<button class="cierra_pop_carrito">x</button>
+		<!-- <p class="pop_carrito_title">BORRAR</p> -->
+		<p class="parrafo_carrito_pop">¿Desea eliminar el articulo del carrito?</p>
+		<button id="borrar_producto" class="canjear_carrito_pop" onclick=""><h2>Borrar</h2></button>
+	</div>
+</div>
+<!--POP UP/EXITOSOS-->
+<div class="opacidad_rc_canje" onclick="cerrar_canje()" style="display: none;text-align: center;">
+	<div class="pop_tabla_canje" onclick="cerrar_canje()" style="display: none;height: 35%;">
+		<button class="cierra_pop_carrito">x</button>
+		<!-- <p class="pop_carrito_title">BORRAR</p> -->
+		<p class="parrafo_carrito_pop">Su canje fue realizado con exito</p>
+	</div>
+</div>
+<!--POP UP/Vacio-->
+<div class="opacidad_rc_vacio" onclick="cerrar_vacio()" style="display: none;text-align: center;">
+	<div class="pop_tabla_vacio" onclick="cerrar_vacio()" style="display: none;height: 35%;">
+		<button class="cierra_pop_carrito">x</button>
+		<p class="pop_carrito_title">CARRITO VACIO</p>
+		<p class="parrafo_carrito_pop">No tienes productos que canjear. Ve al catálogo, para ver los productos disponibles.</p>
+		<button id="vacio_producto" class="canjear_carrito_pop" onclick="window.location.href = 'catalogo.html';">Ir al catálogo</button>
+	</div>
+</div>
+<!--POP UP/NO HAY EN STOCK-->
+<div class="opacidad_rc_stock" onclick="cerrar_stock()" style="display: none;text-align: center;">
+	<div class="pop_tabla_stock" onclick="cerrar_stock()" style="display: none;">
+		<button class="cierra_pop_carrito">x</button>
+		<p class="pop_carrito_title">STOCK INSUFICIENTE</p>
+		<p class="parrafo_carrito_pop" id="label_stock">No tienes productos que canjear. Ve al catálogo, para ver los productos disponibles.</p>
+	</div>
+</div>
+<!--// HEADER-->
+
+<!--CONTENIDO-->
+<div class="padre_catalogo">
+	<div class="hijo_carrito">
+		<div class="content_carrito">
+			<div class="busqueda_carrito">
+				<img class="logo_carrito_vacio" src="image/carrito_negro_vacio.png">
+				<p class="label_carrito">Carrito</p>
+			</div>
+			<!--<div class="producto_carrito">
+                <button class="trash_carrito"></button>
+                <p class="titulo_producto_carrito">Nintendo Switch</p><br>
+                <img class="logo_carrito_nintendo" src="image/Nintendo_switch.png">
+                <p class="puntos_producto_carrito">8,438 pts</p>
+
+                <div id="cantidad_carrito" class="cantidad_carrito">
+                    <button class="btn_resta_carrito">-</button>
+                    <span class="numero_cantidad_carrito">1</span>
+                    <button class="btn_suma_carrito">+</button>
+                    <p class="label_cantidad" >Cantidad:</p>
+                </div>
+                <div class="labels_carrito">
+                    <p class="label_cantidad_eti" >SKU: 4W90UIUHGFER | Marca: Nintendo | Categoría: Tecnología</p>
+                </div>
+            </div>-->
+			<div class="producto_carrito_2">
+				<div class="carrito_total">
+					<p class="label_total" total_points="0">TOTAL</p><p class="puntos_producto_total">0 pts</p>
+				</div>
+				<button class="canjear_carrito" onclick="abre()">Canjear</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!--//CONTENIDO-->
+
+<!--FOOTER-->
+<div class="ul_footer">
+	<div class="ul_foot_uno">
+		<img onclick="regalo()" src="image/regalo_inact.png" class="ul_img_bar"/>
+		<p class="txt_footer_ul inactive_footer">Recompensas</p>
+	</div>
+	<div class="ul_foot_dos">
+		<img onclick="puntos();" src="image/dos_circulos_ac.png" class="ul_img_bar"/>
+		<p class="txt_footer_ul inactive_footer">Mis puntos</p>
+	</div>
+	<div class="ul_foot_tres">
+		<img onclick="canjes();"src="image/compu_ac.png" class="ul_img_bar"/>
+		<p class="txt_footer_ul active_footer">Mis canjes</p>
+	</div>
+</div>
+<div class="degradado_bottom"></div>
+<!--FOOTER-->
+<script type="text/javascript">
+	$( window ).load(function() {
+	$(".cargador").fadeOut();
+	});
+
+	$( document ).ready(function() {
+		//var testObject = [1,3];
+		//localStorage.setItem('productos', testObject);
+		$(".ul_pn_num").text(localStorage.getItem('puntos'));
+		$(".ul_pn_num").attr('mis_puntos',localStorage.getItem('puntos'));
+		var id_producto=localStorage.getItem('productos');
+		if(id_producto!=null){
+			$.get(
+			   "https://rest.samsungplus.mx/service.aspx",
+			   { id_pro: id_producto,tipo: "5" },
+			   function(data){
+			   		//console.log(data);
+			   		var array_objeto=$.parseJSON(data);
+			   		var pts_total=0;
+			      	for(var i=0;i<array_objeto.length;i++){
+			      		$(".busqueda_carrito").after('<div id="producto_'+array_objeto[i][0].id_detalle_producto+'" cantidad_producto="1" class="producto_carrito" ind_points="'+array_objeto[i][0].puntos_necesarios+'" status_envio="'+array_objeto[i][0].id_status_producto+'">'+
+			      									'<button class="trash_carrito" onclick="abrir_borrar('+array_objeto[i][0].id_detalle_producto+')"></button>'+
+			      									'<p class="titulo_producto_carrito" id="id_titulo_'+array_objeto[i][0].id_detalle_producto+'">'+array_objeto[i][0].nombre+'</p><br>'+
+													'<img class="logo_carrito_nintendo" src="https://panel.samsungplus.mx/image_plus/producto/'+array_objeto[i][0].nombre_imagen+'">'+
+													'<p class="puntos_producto_carrito">'+Intl.NumberFormat("en-IN").format(array_objeto[i][0].puntos_necesarios)+' pts</p>'+
+													'<div id="cantidad_carrito" class="cantidad_carrito">'+
+														'<button onclick="restar('+array_objeto[i][0].id_detalle_producto+')" class="btn_resta_carrito">-</button>'+
+														'<span id="cantidad_'+array_objeto[i][0].id_detalle_producto+'" class="numero_cantidad_carrito">1</span>'+
+														'<button onclick="sumar('+array_objeto[i][0].id_detalle_producto+');"  class="btn_suma_carrito">+</button>'+
+														'<p class="label_cantidad" >Cantidad:</p>'+
+													'</div>'+
+													'<div class="labels_carrito">'+
+														'<p class="label_cantidad_eti" >SKU: '+array_objeto[i][0].sku+' | Marca: '+array_objeto[i][0].marca+' | Categoria: '+array_objeto[i][0].categoria+'</p>'+
+													'</div>');
+			      		pts_total=pts_total+parseInt(array_objeto[i][0].puntos_necesarios);
+			      	}
+			      	$(".puntos_producto_total").text(Intl.NumberFormat("en-IN").format(pts_total)+" pts");
+			      	$(".label_total").attr("total_points",pts_total);
+			   },
+			);
+		}
+	});
+
+	function abre(){
+		//CHECA SI HAY PUNTOS SUFICIENTES
+		var puntos_usuario=parseInt(localStorage.getItem('puntos').replace(',',''));
+		//var puntos_usuario=40000;
+		var pts_total=parseInt($(".label_total").attr("total_points"));
+		if(puntos_usuario<pts_total){
+			$(".pop_tabla").fadeIn();
+        	$(".opacidad_rc").fadeIn();
+		}
+		else{
+			var x = document.getElementsByClassName("producto_carrito");
+			var arraynews=[];
+			if(x.length!=0){
+				for (var i = 0; i < x.length; ++i) {
+					var boleto = x[i].getAttribute("status_envio");
+					if (boleto == "Disponible") {
+						console.log(boleto);
+						var item = x[i].id;
+						item=item.replace('producto_','');
+						item=item+"-b";
+					}else{
+						var item = x[i].id;
+						item=item.replace('producto_','');
+					}
+			    arraynews.push({id_prod: item,cantidad: x[i].getAttribute("cantidad_producto"),id_user:localStorage.id_usuario, status_envio:x[i].getAttribute("status_envio"), puntos: x[i].getAttribute("ind_points")});
+				}
+				var array = JSON.stringify({ canjes: arraynews});
+
+				$.post( "https://rest.samsungplus.mx/carrito.aspx",{ canjes: array})
+					  .done(function( data ) {
+					  	if(!isNaN(data)&& data!=""){
+					  		var title=$("#id_titulo_"+data).text();
+					  		$("#label_stock").text("Lo sentimos, no hay suficientes "+title+" para tu orden");
+					  		$(".pop_tabla_stock").fadeIn();
+        					$(".opacidad_rc_stock").fadeIn();
+					  	}
+					  	else{
+						  	localStorage.removeItem('productos');
+						  	var new_pts=parseInt(localStorage.getItem('puntos').replace(',',''));
+						  	var pts_gastados=parseInt($(".label_total").attr("total_points"));
+						  	new_pts=new_pts-pts_gastados;
+						  	localStorage.nProductos=0;
+						  	localStorage.setItem('puntos', Intl.NumberFormat("en-IN").format(new_pts));
+						  	//window.location.href = "historial_canje.html";
+						  	abrir_canje();
+					  	}
+					    //console.log(data)
+				});
+			}
+			else{
+				$(".pop_tabla_vacio").fadeIn();
+        		$(".opacidad_rc_vacio").fadeIn();
+			}
+
+		}
+    }
+    function cerrar(){
+        $(".pop_tabla").fadeOut();
+        $(".opacidad_rc").fadeOut();
+    }
+    //POP DE CANTIDAD
+    function sumar(id_producto){
+    	var curren_value=parseInt($("#cantidad_"+id_producto).text());
+    	if(curren_value<9){
+    		curren_value=curren_value+1;
+    	$("#cantidad_"+id_producto).text(curren_value);
+    	$("#producto_"+id_producto).attr("cantidad_producto",curren_value)
+    	var curren_points=parseInt($(".label_total").attr("total_points"));
+    	var sum_pts=parseInt($("#producto_"+id_producto).attr("ind_points"));
+    	curren_points=curren_points+sum_pts;
+    	$(".label_total").attr("total_points",curren_points);
+    	$(".puntos_producto_total").text(Intl.NumberFormat("en-IN").format(curren_points)+" pts");
+    	}
+    }
+    function restar(id_producto){
+    	var curren_value=parseInt($("#cantidad_"+id_producto).text());
+    	if(curren_value>=1){
+    		curren_value=curren_value-1;
+    	$("#cantidad_"+id_producto).text(curren_value);
+    	$("#producto_"+id_producto).attr("cantidad_producto",curren_value);
+    	var curren_points=parseInt($(".label_total").attr("total_points"));
+    	var sum_pts=parseInt($("#producto_"+id_producto).attr("ind_points"));
+    	curren_points=curren_points-sum_pts;
+    	$(".label_total").attr("total_points",curren_points);
+    	$(".puntos_producto_total").text(Intl.NumberFormat("en-IN").format(curren_points)+" pts");
+    	}
+    }
+    //POP BORRAR
+    function abrir_borrar(id_borra){
+        $(".pop_tabla_borrar").fadeIn();
+        $(".opacidad_rc_borrar").fadeIn();
+        $("#borrar_producto").attr("onclick","borrar_registro("+id_borra+")");
+    }
+    function cerrar_borrar(){
+        $(".pop_tabla_borrar").fadeOut();
+        $(".opacidad_rc_borrar").fadeOut();
+    }
+    //POP CANJE
+    function abrir_canje(){
+        $(".pop_tabla_canje").fadeIn();
+        $(".opacidad_rc_canje").fadeIn();
+    }
+    function cerrar_canje(){
+        $(".pop_tabla_canje").fadeOut();
+        $(".opacidad_rc_canje").fadeOut();
+        window.location.href = "historial_canje.html";
+    }
+    //POP VACIO
+    function cerrar_vacio(){
+        $(".pop_tabla_vacio").fadeOut();
+        $(".opacidad_rc_vacio").fadeOut();
+    }
+    //POP STOCK
+    function cerrar_stock(){
+        $(".pop_tabla_stock").fadeOut();
+        $(".opacidad_rc_stock").fadeOut();
+    }
+    ////////
+	function puntos(){
+		window.location.href = "mis_puntos_connect.html";
+	}
+	function canjes(){
+		window.location.href = "historial_canje.html";
+	}
+	function regalo(){
+		window.location.href = "catalogo.html";
+	}
+	function academy(){
+		window.location.href = "academy.html";
+	}
+
+	function borrar_registro(id_borra){
+
+		array = localStorage.getItem('productos');
+		array= array.replace(/-b/g, "");
+
+ 		var array = array.split(',').map( Number );
+		var index = array.indexOf(parseInt(id_borra));
+
+		if (index > -1) {
+		    array.splice(index, 1);
+		    localStorage.setItem('productos',array);
+			if(localStorage.getItem('productos')==""){localStorage.removeItem('productos');}
+		    var puntos_tot=parseInt($(".label_total").attr("total_points"));
+		    var puntos_neg=parseInt($("#producto_"+id_borra).attr("ind_points"));
+
+		    var current_puntos=puntos_tot - puntos_neg;
+		    if (current_puntos<0){
+		    	current_puntos=0;
+		    }
+		    localStorage.nProductos=0;
+		    $("#producto_"+id_borra).remove();
+			$(".label_total").attr("total_points",current_puntos);
+			$(".puntos_producto_total").text(Intl.NumberFormat("en-IN").format(current_puntos)+" pts");
+		}
+	}
+
+        function oprimir_back(){
+           window.location.href = "catalogo.html";
+        }
+
+	</script>
+<!--FOOTER-->
+</body>
+
+</html>

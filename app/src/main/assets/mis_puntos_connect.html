@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- jQuery library (served from Google) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="js/jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="css/jquery.bxslider.css" rel="stylesheet" />
+<script type="text/javascript">
+$(document).load(function() {
+$(".cargador").css("display","block");
+});
+$(document).ready(function(){
+	$(".cargador").fadeOut();
+  });
+</script>
+    <style>
+        .bx-wrapper {
+            -moz-box-shadow: 0 0 5px transparent !important;
+            -webkit-box-shadow: 0 0 5px transparent !important;
+            box-shadow: 0 0 5px transparent !important;
+            border: 5px solid transparent !important;
+            background: transparent !important;
+        }
+
+        .bx-wrapper .bx-pager {
+            text-align: center;
+            font-size: .85em;
+            font-family: Arial;
+            font-weight: bold;
+            color: #666;
+            padding-top: 20px;
+            display: none;
+        }
+
+        .bx-wrapper {
+            position: relative;
+            margin-bottom: 13px;
+            padding: 0;
+            -ms-touch-action: pan-y;
+            touch-action: pan-y;
+        }
+        #m_canje{
+          color:white;
+          width:33%;
+           font-family:SamsungSharpSans_regular;
+           text-align: center;
+        }
+        #m_canje_b{
+          color:white;
+          width:33%;
+           font-family:SamsungSharpSans_bold;
+           text-align: center;
+        }
+        #m_puntos_b{
+          color:white;
+          width:33%;
+         font-family:SamsungSharpSans_bold;
+          text-align: left;
+        }
+        #m_puntos{
+          color:white;
+          width:33%;
+         font-family:SamsungSharpSans_regular;
+          text-align: left;
+        }
+        .cargador{
+        	/*background-color: black;*/
+          background: url(image/cargando.png) center center / cover no-repeat fixed;
+        	position: fixed;
+        	height: 92%;
+        	width: 100%;
+        	z-index: 3;
+          bottom: 0;
+        }
+    </style>
+
+</head>
+<div class="cargador">
+</div>
+<body style="background: #000;">
+    <div class="contenido_miperfil">
+        <div class="header" style="background: #000;">
+            <img onclick="app.showMenu();" style="width:20px; margin-left:14px; margin-top:17px;" src="image/menu.png" alt="">
+            <div>
+                <span style="margin-bottom: 10px;">Mis puntos<span> <span style="font-family: SamsungSharpSans_bold; font-size: 18px;" id="muestra_puntos"></span>
+            </div>
+        </div>
+        <div class="cont_miperfil">
+        <div class="buscador_academy">
+            <input type="text" placeholder="Mis puntos" disabled class="search"/>
+        </div>
+
+        <div class="perfil">
+            <div id="nombre_usuario" style="text-align: center; color:white; font-family: SamsungSharpSans_bold; font-size: 14px; margin-bottom: 40px;">
+              Nombre usuario
+            </div>
+            <div style="display:flex; color:white; justify-content: space-between; font-family: SamsungSharpSans_bold; margin-top: 18px;margin-bottom: 20px; font-size: 16px;">
+                <div>Puntos disponibles</div>
+                <div id="puntos_disponibles"></div>
+            </div>
+
+            <div style="display:flex; color:white; justify-content: space-between; font-family: SamsungSharpSans_bold; margin-top: 18px;margin-bottom: 20px; font-size: 16px;" >
+                <div>Puntos ganados</div>
+                <div id="puntos_ganados"></div>
+            </div>
+
+            <div style="display:flex; color:white; justify-content: space-between; font-family: SamsungSharpSans_bold; margin-top: 18px;margin-bottom: 20px; font-size: 16px;">
+                <div>Puntos redimidos</div>
+                <div id="puntos_redimidos"></div>
+            </div>
+        </div>
+
+        <div class="perfil">
+            <div style="text-align: center; color:white; font-family: SamsungSharpSans_bold; font-size: 14px; margin-top: 30px;">
+                Historial
+            </div>
+        </div>
+        <div style="width:50%;display:flex; margin-bottom:10px;">
+          <div onclick="m_puntos()" id="m_puntos_b" style="">Puntos</div>
+          <div  style="color:white;width:33%; font-family:SamsungSharpSans_bold; text-align: center">|</div>
+          <div onclick="m_canje()" id="m_canje" >Canjes</div>
+        </div>
+
+        <div style="border-top: solid rgba(255,255,255,0.4) 1px;display:flex; justify-content: space-between; color:white; font-family: SamsungSharpSans_regular; font-size: 12px; border-bottom: solid rgba(255,255,255,0.4) 1px;">
+            <div>Fecha</div>
+            <div>Descripción</div>
+            <div>Puntos</div>
+        </div>
+        <div id="contenido_hist">
+
+
+        </div>
+
+    </div>
+    </div>
+  <script>
+  function oprimir_back(){
+     window.location.href = "miperfil.html";
+  }
+  </script>
+
+<script>
+
+
+
+    $('#nombre_usuario').html(localStorage.nombre);
+    function oprimir_back(){
+       window.history.back();
+    }
+    //$('.search').after("<img src='image/pencil.png' width='15'/>");
+    $('.search').before("<img src='image/perfil_icono.png' width='15'/>");
+
+    $(document).ready(function(){
+    	$('#muestra_puntos').html(localStorage.getItem("puntos"));
+    	$('#puntos').html(localStorage.getItem("puntos"));
+        $('#puntos_ganados').html(localStorage.getItem("puntos"));
+        $('#puntos_disponibles').html(localStorage.getItem("puntos"));
+        function a_perfil(){
+            window.location.href = "mis_puntos.html";
+        }
+
+      var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=7&id="+localStorage.id_usuario;
+
+    			$.ajax({
+    					url: urlGet,
+    					success: function(data)
+    					{
+
+    						if(data!=null){
+                  var solucion = JSON.parse(data);
+
+                  $('#cliente').html("<b>Cliente: </b>"+ solucion.cliente);
+                  $('#tienda').html("<strong>Tienda: </strong>"+ solucion.tienda_nombre);
+                  $('#rol').html("<strong>Rol: </strong>"+ solucion.rol_puesto);
+                  $('#empleado').html("<strong>ID de empleado: </strong>"+ solucion.id_empleado);
+                  $('#email').html("<strong>Email: </strong>"+ solucion.email);
+                  $('#celular').html("<strong>No. de celular: </strong>"+ solucion.celular);
+                  $('#nombre').text(solucion.nombre);
+
+                }
+    					}
+    			});
+
+      var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=2&id="+localStorage.id_usuario;
+
+          $.ajax({
+              url: urlGet,
+              success: function(data2)
+              {
+
+              if(data2!=null){
+                var solucion2 = JSON.parse(data2);
+
+                $('#puntos_disponibles').text(solucion2.puntos_dispo);
+                $('#puntos_ganados').text(solucion2.puntos_ganados);
+                $('#puntos_redimidos').text(solucion2.puntos_redimi);
+              }
+            }
+        });
+
+
+
+            var urlLoad= "https://rest.samsungplus.mx/miperfil3.aspx?id="+localStorage.id_usuario;
+            $("#contenido_hist").load(urlLoad,function(){
+          $(".canje").css("display","none");
+            }  );
+
+
+    });
+
+
+
+function m_canje(){
+  $(".canje").fadeIn();
+  $(".puntos").css("display","none");
+  $('#m_puntos_b').attr('id','m_puntos');
+  $('#m_canje').attr('id','m_canje_b');
+
+}
+function m_puntos(){
+  $(".puntos").fadeIn();
+  $(".canje").css("display","none");
+    $('#m_canje_b').attr('id','m_canje');
+      $('#m_puntos').attr('id','m_puntos_b');
+}
+</script>
+</body>
+</html>

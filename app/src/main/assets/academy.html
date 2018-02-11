@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- jQuery library (served from Google) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="js/jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+    <style>
+    .bx-wrapper .bx-pager.bx-default-pager a{
+        border-color: #666;
+        border-width: 1px;
+        border-style: solid;
+    }
+    .btn_cap{
+        top:110px;
+    }
+    input::-webkit-input-placeholder{
+    color:white;
+    }
+    input:-moz-placeholder {
+        color:white;
+    }
+        .bx-wrapper {
+          margin-left: 60px;
+            -moz-box-shadow: 0 0 5px transparent !important;
+            -webkit-box-shadow: 0 0 5px transparent !important;
+            box-shadow: 0 0 5px transparent !important;
+            border: 5px solid transparent !important;
+            background: transparent !important;
+        }
+        .header{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+
+  }
+  .header div{
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: %;
+    height: 45px;
+    color:#fff;
+    font-family: "SamsungSharpSans_regular";
+    font-size: 9px;
+    text-align: center;
+    padding-top: 17px;
+  }
+
+  .header div li{
+    display: inline-block;
+    vertical-align: middle;
+  }
+  #nombre_portada{
+    color: white;
+    font-size: 20px;
+    font-family: "SamsungSharpSans_regular";
+
+  }
+  .cargador{
+   background-color: black;
+   position: fixed;
+   height: 95%;
+   width: 100%;
+   z-index: 3;
+    bottom: 0;
+  }
+  .bx-wrapper {
+     margin-left: 0% !important;
+   }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+          $('.bxslider').bxSlider({
+            slideWidth: 250,
+            minSlides: 1,
+            maxSlides: 1,
+            slideMargin: 10
+          });
+        });
+    </script>
+</head>
+<div class="cargador">
+</div>
+<body>
+<div class="contenido_home_academy_2">
+    <div class="header" style="background: #000;">
+        <img onclick="app.showMenu();" style="width:20px; margin-left:14px; margin-top:17px;" src="image/menu.png" alt="">
+        <div onclick="a_perfil()">
+                <span style="margin-bottom: 10px;">Mis puntos<span> <span style="font-family: SamsungSharpSans_bold; font-size: 18px;" id="muestra_puntos"></span>
+        </div>
+    </div>
+    <div class="cont_academy">
+        <div style="background: #000;">
+            <div class="buscador_academy_dos">
+                <input onkeypress="buscar();" id="busqueda" type="text" placeholder="Curso" class="search" disabled/>
+                <div id="lista_cursos" style="display:none;">
+                        <span class="box">
+                            <select class="contentselect" id="contentselect" style="color: black;background-color: white;">
+                                <option disabled selected> Seleccione uno</option>
+                            </select>
+                        </span>
+                </div>
+            </div>
+            <div class="imagen_academy">
+                <img id="portada" src="" style="width: 100%;"/>
+            </div>
+
+            <div class="imagen_texto">
+                <h1 id="nombre_portada"></h1>
+                <h2 id="puntos" style="font-size: 12px"></h2>
+                <a id="capacitacion" href="detalle.html"><button type="button">Capacitación</button></a>
+                <!--<h2 id="puntos_cer" style="font-size: 12px; margin-top:20px;"></h2>
+                <a id="certificacion" href="detalle_capacitacion.html"><button type="button">Certificación</button></a>-->
+            </div>
+        </div>
+        <img src="image/barrita.png" height="1px" style="width: 85%;"/>
+        <div class="carrousel">
+            <h4>Telecom</h4>
+            <div id="slider_1">
+
+            </div>
+            <h4>Tabletas</h4>
+            <div id="slider_2">
+
+            </div>
+            <h4>Phone+</h4>
+            <div id="slider_3">
+
+            </div>
+            <h4>Soft Skills</h4>
+            <div id="slider_4">
+
+            </div>
+        </div>
+    </div>
+    <div class="footer_academy" style="z-index: 1000;">
+        <div class="cont_images_footer"><a href=""><img src='image/cursos_blanco.png' width='30'/></a></div>
+        <div class="cont_images_footer"><a href="juego.html"><img src='image/juegos_azul.png' width='30'/></a></div>
+        <div class="cont_images_footer"><a href="biblioteca.html"><img src='image/biblioteca_azul.png' width='30'/></a></div>
+    </div>
+</div>
+<script>
+textfield = document.getElementById("datatext");
+contentselect = document.getElementById("contentselect");
+
+contentselect.onchange = function(){
+        var text = contentselect.options[contentselect.selectedIndex].value
+        if(text != ""){
+            textfield.value += text;
+        }
+}
+function buscar(){
+  var palabra =$("#busqueda").val();
+  var urlLoadBanner = "https://rest.samsungplus.mx/slider_buscar.aspx?buscar="+palabra;
+  $("#slider").load(urlLoadBanner);
+
+}
+    $('.search').after("<img id='btn_buscar' src='image/filter.png' width='15'/>");
+    $('.search').before("<img src='image/logo_uno.png' width='15'/>");
+    $('#muestra_puntos').html(localStorage.getItem("puntos"));
+    function a_perfil(){
+        window.location.href = "mis_puntos_connect.html";
+    }
+
+      function oprimir_back(){
+       window.location.href = "home_academy.html";
+    }
+    var urlLoadBanner = "https://rest.samsungplus.mx/slider_academy.aspx?tipo=1&id_carrier="+localStorage.id_carrier;
+    $("#slider_1").load(urlLoadBanner);
+    var urlLoadBanner = "https://rest.samsungplus.mx/slider_academy.aspx?tipo=2&id_carrier="+localStorage.id_carrier;
+    $("#slider_2").load(urlLoadBanner);
+    var urlLoadBanner = "https://rest.samsungplus.mx/slider_academy.aspx?tipo=3&id_carrier="+localStorage.id_carrier;
+    $("#slider_3").load(urlLoadBanner);
+    var urlLoadBanner = "https://rest.samsungplus.mx/slider_academy.aspx?tipo=4&id_carrier="+localStorage.id_carrier;
+    $("#slider_4").load(urlLoadBanner);
+
+    $("#btn_buscar").click(function(){
+        if($('#lista_cursos').css('display') == 'none')
+        {
+            $("#lista_cursos").show();
+        }
+       else
+        {
+            $("#lista_cursos").hide();
+        }
+
+    });
+    $("#contentselect").change(function(){
+        url_option=$("#contentselect").val();
+        window.location.href=url_option;
+    });
+    $( document ).ready(function() {
+      var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=11";
+
+
+             $.ajax({
+                   url: urlGet,
+                   success: function(data)
+                   {
+
+                   if(data!=null){
+                      var solucion = JSON.parse(data);
+                $('#nombre_portada').html(solucion.nombre_capacitacion);
+                $('#puntos').html(solucion.puntos);
+                if(solucion.puntos_cer ==null){
+                  $('#puntos_cer').css("display","none");
+                  $('#certificacion').css("display","none");
+                }else{
+                  $('#puntos_cer').html(solucion.puntos_cer);
+                  $('#certificacion').attr("href","detalle_capacitacion.html?id="+solucion.id_certificacion);
+                }
+                $('#portada').attr("src","https://panel.samsungplus.mx/image_academy/portada/"+solucion.portada);
+                $('#capacitacion').attr("href","detalle.html?id="+solucion.id_capactitacion);
+
+
+                   }
+                }
+          });
+    });
+
+    jQuery(window).load(function () {
+      $(".cargador").fadeOut();
+  });
+</script>
+</body>
+</html>

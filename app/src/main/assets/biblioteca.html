@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- jQuery library (served from Google) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="js/jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+    <style>
+    input::-webkit-input-placeholder{
+    color:white;
+    }
+    input:-moz-placeholder {
+        color:white;
+    }
+        .bx-wrapper {
+          margin-left: 60px;
+            -moz-box-shadow: 0 0 5px transparent !important;
+            -webkit-box-shadow: 0 0 5px transparent !important;
+            box-shadow: 0 0 5px transparent !important;
+            border: 5px solid transparent !important;
+            background: transparent !important;
+        }
+
+ .header{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 45px;
+
+  }
+  .header div{
+    top: 0;
+    right: 0;
+    position: absolute;
+    width: %;
+    height: 45px;
+    color:#fff;
+    font-family: "SamsungSharpSans_regular";
+    font-size: 9px;
+    text-align: center;
+    padding-top: 17px;
+  }
+
+  .header div li{
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .cargador{
+    background-color: black;
+    position: fixed;
+    height: 95%;
+    width: 100%;
+    z-index: 3;
+    bottom: 0;
+  }
+    </style>
+
+    <script>
+
+    jQuery(window).load(function () {
+      $(".cargador").fadeOut();
+  });
+        $(document).ready(function(){
+          $('.bxslider').bxSlider({
+            slideWidth: 250,
+            minSlides: 1,
+            maxSlides: 1,
+            slideMargin: 10
+          });
+        });
+    </script>
+</head>
+<div class="cargador">
+</div>
+<body>
+    <div class="contenido_home_academy">
+    <div class="header">
+        <img onclick="app.showMenu();" style="width:20px; margin-left:14px; margin-top:17px;" src="image/menu.png" alt="">
+        <div onclick="a_perfil()">
+            <span style="margin-bottom: 10px;">Mis puntos<span> <span style="font-family: SamsungSharpSans_bold; font-size: 18px;" id="muestra_puntos"></span>
+        </div>
+      </div>
+
+      <div class="cont_academy">
+        <div>
+            <div class="buscador_academy_dos">
+                <input id="busca" type="text" placeholder="Biblioteca" class="search" style="color:white;" disabled/>
+            </div>
+        </div>
+        <div id="cursos" style="margin-bottom:100px;">
+
+        </div>
+
+    </div>
+
+    <div class="footer_academy" style="z-index: 1000;">
+            <div class="cont_images_footer"><a href="academy.html"><img src='image/cursos_azul.png' width='30'/></a></div>
+            <div class="cont_images_footer"><a href="juego.html"><img src='image/juegos_azul.png' width='30'/></a></div>
+            <div class="cont_images_footer"><a href=""><img src='image/biblioteca_blanco.png' width='30'/></a></div>
+        </div>
+    </div>
+
+
+<script>
+  $( window ).load(function() {
+    localStorage.from_curso=0;
+    $(".cargador").fadeOut();
+    });
+    $('.search').after("<img src='image/lupa.png' width='15'/>");
+    $('.search').before("<img src='image/biblioteca_blanco2.png' height='17'/>");
+    $('#muestra_puntos').html(localStorage.getItem("puntos"));
+    function oprimir_back(){
+       window.location.href = "academy.html";
+    }
+    function a_perfil(){
+        window.location.href = "mis_puntos_connect.html";
+
+      }
+      $( document ).ready(function() {
+      var urlLoadCurso = "https://rest.samsungplus.mx/biblioteca.aspx";
+      $("#cursos").load(urlLoadCurso);
+    });
+
+
+$('#busca').keyup(function() {
+  var cadena=$('#busca').val();
+  if(cadena.length ==0){
+    console.log("vacio");
+    var urlLoadCurso = "https://rest.samsungplus.mx/biblioteca.aspx";
+    $('#cursos').load(urlLoadCurso);
+  }else {
+    console.log("https://rest.samsungplus.mx/biblioteca_buscar.aspx?buscar="+cadena);
+
+    var urlLoadBusqueda = "https://rest.samsungplus.mx/biblioteca_buscar.aspx?buscar="+cadena;
+    $('#cursos').load(urlLoadBusqueda);
+  }
+});
+
+</script>
+</body>
+</html>

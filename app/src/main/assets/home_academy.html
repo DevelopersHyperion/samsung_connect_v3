@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<style>
+  .footer{
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 90%;
+    position: absolute;
+    margin-bottom: 36px;
+
+  }
+  .footer li,p{
+    width: 32%;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    font-family: "SamsungSharpSans_regular";
+    font-size: 12px;
+
+  }
+
+
+</style>
+
+<body>
+    <div class="contenido_home_academy">
+      <div class="header">
+
+        <!-- <img onclick="app.showMenu();" style="width:20px; margin-left:14px; margin-top:17px;" src="image/menu.png" alt=""> -->
+        <div onclick="a_perfil()">
+           <span style="margin-bottom: 10px;">Mis puntos<span> <span style="font-family: SamsungSharpSans_bold; font-size: 18px;" id="muestra_puntos"></span>
+        </div>
+      </div>
+        <div class="cont_home_academy">
+            <h2 style="font-family: SamsungSharpSans_bold; font-size: 20px; margin-bottom: 50px;">Bienvenido a:</h2>
+            <img src="image/samsung_connect_logo.png" style="width: 85%;"/>
+            <h2 style="font-family: SamsungOne-200; font-size: 19px;margin-top: 50px;">Ahora podrás tener acceso a herramientas que te permitirán incrementar tu conocimiento y ventas del nuevo <b>Galaxy S8</b> en cualquier lugar</h2>
+        </div>
+        <div style="display:none;"id="plus" class="footer">
+          <ul>
+            <li  style="text-align:left"><span style="margin-left:72px;"></span> </li>
+            <li><strong onclick="plus();">PLUS</strong></li>
+            <li style="text-align:right;"><span style="margin-right:72px;"></span></li>
+          </ul>
+        </div>
+        <div style="display:none;" id="academy" class="footer">
+          <ul>
+            <li  style=" text-align:left"><span style="margin-left:72px;"></span> </li>
+            <li><strong onclick="a_academy();">ACADEMY</strong></li>
+            <li  style="text-align:right;"><span style="margin-right:72px;"></span></li>
+          </ul>
+        </div>
+        <div style="display:none;"id="plus_academy"class="footer">
+          <ul>
+            <li onclick=plus();"" style=" text-align:left"><span style="margin-left:72px;">PLUS</span> </li>
+            <li><strong onclick="redirec();">|</strong></li>
+            <li onclick="a_academy();  " style="text-align:right;"><span style="margin-right:72px;">ACADEMY</span></li>
+          </ul>
+          <script>
+			function sendEmail()
+			{
+			    window.location = "mailto:samsungplus@rewards.com.mx";
+			}
+			function sendCall(){
+				window.location.href="tel://01-800-681-6000";
+			}
+			function callTerminos(){
+              var carrier=localStorage.getItem("id_carrier");
+              var url_terminos="";
+              if (carrier=="1"){
+                window.location.href="https://panel.samsungplus.mx/terminos/TELCEL.pdf";
+              }
+              else if(carrier=="2"){
+                  window.location.href="https://panel.samsungplus.mx/terminos/MOVISTAR.pdf";
+              }
+              else if(carrier=="3"){
+                  window.location.href="https://panel.samsungplus.mx/terminos/ATT.pdf";
+              }
+            }
+		  </script>
+            <div style="margin-top: 32px;font-size: 13px;text-align: right;color: white;">
+                <p style="display: inline;font-size: 10px;">Da click para contactarnos:</p>
+                <p style="display: inline;font-size: 10px;color: rgb(101, 104, 255);" onclick="sendEmail()">samsungplus@rewards.com.mx </p>| <p style="display: inline;font-size: 10px;" onclick="sendCall()"></p>
+                <a  id="descarga_terminos" href="#"  style="display: inline;font-size: 10px;    color: #fff;    text-align: center;    font-family: 'SamsungSharpSans_regular';" onclick="callTerminos();">Términos</a>
+            </div>
+        </div>
+    </div>
+    <script>
+function plus(){
+  window.location.href = "catalogo.html";
+}
+
+      $(document).ready(function(){
+              $('#muestra_puntos').html(localStorage.getItem("puntos"));
+              if(localStorage.id_usuario!=null){
+                $('#result').text(localStorage.nombre);
+              }else {
+                $('#result').text("Nombre de usuario");
+              }
+
+              var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=1&id="+localStorage.id_usuario;
+              console.log(urlGet);
+                  $.ajax({
+                      url: urlGet,
+                      success: function(data2)
+                      {
+                        if(data2!=null){
+                          if(data2==3){
+                          $('#plus_academy').fadeIn();
+                          }else if (data2==1) {
+                            $('#plus').fadeIn();
+                          }else if (data2==2) {
+                            $('#academy').fadeIn();
+                          }
+                        }
+                      }
+                  });
+      });
+      function redirec(){
+        window.location.href = "academy.html";
+
+      }
+      function a_perfil(){
+        window.location.href = "mis_puntos_connect.html";
+
+      }
+
+      function a_academy(){
+        window.location.href = "academy.html";
+
+      }
+
+      function oprimir_back(){
+       window.history.back();
+    }
+
+            function oprimir_back(){
+               window.history.back();
+            }
+
+
+    </script>
+</body>
+</html>

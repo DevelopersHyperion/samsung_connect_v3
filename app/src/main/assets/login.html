@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <style type="text/css">
+      .footer{
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 90%;
+        position: absolute;
+        margin-bottom: 36px;
+      }
+      .footer li,p{
+        width: 32%;
+        display: inline-block;
+        color: #fff;
+        text-align: center;
+        font-family: "SamsungSharpSans_regular";
+        font-size: 12px;
+
+      }
+      .pop_registro{
+        z-index: 100;
+      width: 80%;
+      height: 80%;
+      left: 10%;
+      top: 10%;
+      background-color: aliceblue;
+      border-radius: 1.5em;
+      position: absolute;
+      display: none;
+      overflow-x: hidden;
+      }
+      .opacidad_registro{
+        width: 100%;
+        height: 100%;
+        background-color:black;
+        opacity: .5;
+        display: none;
+      }
+      #form{
+        margin-left: 10%;
+      width: 80%;
+      font-size:3vw;
+      font-family: "SamsungSharpSans_regular";
+      }
+      input{
+        width: 100%;
+      font-size: 3vw;
+      padding: 5px;
+      border-radius: 1em;
+      }
+    </style>
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <div class="opacidad_rc" onclick="cerrar()" style="display: none;">
+        <div class="pop_tabla3" onclick="cerrar()" style="display: none;">
+            <button class="cierra_pop_carrito">x</button>
+            <p style="text-align:center;" class="parrafo_carrito_pop">para restablecer su contraseña por favor comuníquese al siguiente correo electronico: <b style="font-size:15px">samsungplus@rewards.com.mx</b></p>
+        </div>
+    </div>
+</head>
+
+<body>
+<div class="contenido_login">
+
+    <div class="cont_login">
+        <img src="image/logo_connect.png" style="width: 200px;" />
+        <p>Inicia sesión</p>
+        <form  method="post">
+            <input id="emailid" type="email" placeholder="ID Empleado" autocomplete="off" style="margin-top: 20px;"/>
+            <input id="contrasenaid" type="password" placeholder="Contraseña" autocomplete="off" style="margin-top: 20px;"/>
+            <span class="olvidaste" id="result"></span>
+            <div style="width: 100%;height: 100px;margin-left: 0%;">
+                <p onclick="abre();" style="float: right;cursor: pointer;">¿Olvidaste tu contraseña?</p>
+                <p onclick="pop_registro();" style="float: left;cursor: pointer;">Usuario nuevo</p>
+            </div>
+            <button id="inicia" type="button">Iniciar</button>
+        </form>
+    </div>
+    <div class="footer">
+        <div style="margin-top: 32px;font-size: 13px;text-align: right;color: white;">
+            <script>
+          function sendEmail()
+          {
+              window.location = "mailto:samsungplus@rewards.com.mx";
+          }
+          function sendCall(){
+            window.location.href="tel://01-800-681-6000";
+          }
+        </script>
+            <p style="display: inline;font-size: 10px;">Contacto:</p>
+            <p style="display: inline;font-size: 10px;" onclick="sendEmail()">samsungplus@rewards.com.mx </p>| <p style="display: inline;font-size: 10px;" onclick="sendCall()">01-800-681-6000</p>
+        </div>
+    </div>
+    <div class="opacidad_registro" onclick="hidePop()"></div>
+    <div class="pop_registro">
+        <div style="width: 103%;height: 100%;overflow-y: scroll;">
+            <h2 style="text-align:center;font-family: 'SamsungSharpSans_bold'; padding-top: 1.2vw;padding-bottom: 1.2vw;">Registrar</h2>
+            <form  id="form" method="post" runat="server">
+                <label style="text-align: center;">Regístrate para poder participar </label><br><br>
+                <div class="form-group">
+                    <label style="text-align: left;">Nombre *</label>
+                    <div>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">Apellidos *</label>
+                    <div>
+                        <input type="text" id="apellidos" name="apellidos" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">Cliente *</label>
+                    <div>
+                        <!--<select name="cliente" id="cliente" data-width="100%" title="cliente" style="background-color: white;color: black;border-radius:1em;" onchange="busca_cac()">
+                                <option></option>
+                         </select>-->
+                        <input type="text" id="cliente" name="cliente" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">CAC *</label>
+                    <div>
+                        <input type="text" id="cac" name="cac" class="form-control" placeholder="">
+                        <!--<select name="cac" id="cac" data-width="100%" title="cac" style="background-color: white;color: black;border-radius:1em;">-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">Rol *</label>
+                    <div>
+                        <select name="rol" id="rol" data-width="100%" title="rol" style="background-color: white;color: black;border-radius:1em;">
+                            <option val=1>Supervisor</option>
+                            <option val=2>Vendedor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">Id empleado *</label>
+                    <div>
+                        <input type="text" id="id_empleado" name="id_empleado" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">Contrase&ntilde;a* </label>
+                    <div>
+                        <input type="password" id="pass" name="pass" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">Email *</label>
+                    <div>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="text-align: left;">Teléfono</label>
+                    <div>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div style="display: inline-flex;">
+                        <input type="checkbox" name="condiciones" id="condiciones" style="width: auto;" />
+                        <label style="display: inline-table;" for="condiciones" id="label_condiciones">
+                            He leído  y acepto los
+                            <a onclick="decargar_terminos()" href="https://panel.samsungplus.mx/terminos/Terminos y condiciones Samsung Plus.pdf">términos y condiciones</a>
+                        </label>
+                    </div>
+                    <text style="display: inline-table; color: red;display: none;" id="caution_text">
+                        Rellene todos los campos
+                    </text>
+                </div>
+                <div class="form-group" style="padding-top: 20px;">
+                    <div>
+                        <button type="button" id="boton" onclick="AddData()" class="btn btn-success" style="padding: 10px;    border-radius: 1em;width: 30%;background-color: #0087ff;margin-left: 35%;margin-top: 10px;font-size: 1em;"> <i class="fa fa-floppy-o" aria-hidden="true"></i> REGISTRAR</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+var obj;
+$( document ).ready(function() {
+    if(localStorage.id_usuario!=null){
+        window.location.href = "home_academy.html";
+    }
+    var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=30";
+    $.ajax({
+          url: urlGet,
+          success: function(data2)
+          {
+           obj=JSON.parse(data2);
+          /*if(data2!=null){
+            var clientes = JSON.parse(data2);
+            console.log(clientes);
+            var $dropdown = $("#cliente");
+      			$.each(clientes, function() {
+      			    $dropdown.append($("<option />").val(this.id_cliente).text(this.nombre));
+      			});
+          }*/
+        }
+    });
+});
+function abre(){
+    //$(".pop_tabla3").fadeIn();
+    //$(".opacidad_rc").fadeIn();
+    var email = 'samsungplus@rewards.com.mx';
+    var subject = 'Restaurar contraseña';
+    var emailBody = 'Solicitud de restauracion de contraseña para el usuario:'+$("#emailid").val();
+    window.location = 'mailto:' + email + '?subject=' + subject + '&body=' +   emailBody;
+}
+function cerrar(){
+    $(".pop_tabla3").fadeOut();
+    $(".opacidad_rc").fadeOut();
+  }
+function pop_registro(){
+  $(".opacidad_registro").show();
+  $(".pop_registro").fadeIn( "slow" );
+}
+function hidePop(){
+  $(".opacidad_registro").fadeOut("slow");
+  $(".pop_registro").fadeOut( "slow" );
+}
+function busca_cac(){
+  console.log($("#cliente").val());
+  var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=31&id="+$("#cliente").val();
+    $.ajax({
+          url: urlGet,
+          success: function(data2)
+          {
+          if(data2!=null){
+            var clientes = JSON.parse(data2);
+            console.log(clientes);
+            var $dropdown = $("#cac");
+            $dropdown.empty();
+      $.each(clientes, function() {
+          $dropdown.append($("<option />").val(this.id_cliente).text(this.nombre));
+      });
+          }
+        }
+    });
+}
+
+$('#inicia').click(function() {
+      $.ajax(
+        {
+          type: "POST",
+          url: 'https://rest.samsungplus.mx/login.aspx',
+          data: {
+              email: $("#emailid").val(),
+              contrasena: $("#contrasenaid").val(),
+              version: 1
+          },
+          success: function(data)
+          {
+            if(data==0){
+                  $('#result').text("¡Usuario o contraseña no valido!");
+                }else {
+                  if(solucion.id_usuario!=""){
+                  var solucion = JSON.parse(data);
+
+                  console.log(solucion);
+                  localStorage.id_usuario = solucion.id_usuario;
+                  localStorage.nombre = solucion.nombre;
+                      localStorage.color=solucion.color;
+                      localStorage.logo=solucion.logo;
+                      localStorage.id_carrier=solucion.id_carrier;
+                      localStorage.from_curso=0;
+                      localStorage.jump=0;
+
+                  var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=2&id="+solucion.id_usuario;
+
+                      $.ajax({
+                          url: urlGet,
+                          success: function(data2)
+                          {
+                          if(data2!=null){
+                            var solucion2 = JSON.parse(data2);
+
+                            localStorage.puntos = solucion2.puntos_dispo;
+                            window.location.href = "home_academy.html";
+
+                          }
+                        }
+                    });
+                    }
+                    else{
+                        $('#result').text("¡Usuario o contraseña no valido!");
+                    }
+                }
+        }
+      });
+  });
+$('#nombre').on('input', function (e) {
+    var str = $("#nombre").val();
+    var nstr = str.replace(/[^a-z\s]/gi, '');
+    $("#nombre").val(nstr);
+});
+$('#apellidos').on('input', function (e) {
+    var str = $("#apellidos").val();
+    var nstr = str.replace(/[^a-z\s]/gi, '');
+    $("#apellidos").val(nstr);
+});
+$('#cliente').on('input', function (e) {
+    var str = $("#nombre").val();
+    var nstr = str.replace(/[^a-z\s]/gi, '');
+    $("#nombre").val(nstr);
+});
+$('#phone').on('input', function (e) {
+            var str = $("#phone").val();
+            var nstr = str.replace(/\D/g, '');
+            $("#phone").val(nstr);
+        });
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+function AddData(){
+  if($("#condiciones").prop("checked")==false){
+    $("#label_condiciones").css("color", "red");
+  }
+  else{
+    var nombre=$("#nombre").val();
+		var apellidos=$("#apellidos").val();
+		var cliente=$("#cliente").val();
+		var cac=$("#cac").val();
+		var rol=$("#rol :selected").text();
+		var id_empleado=$("#id_empleado").val();
+		var password=$("#pass").val();
+		var email=$("#email").val();
+		var phone=$("#phone").val();
+    if(nombre=!""&&apellidos!=""&&cliente!=""&&cac!=""&&rol!=""&&id_empleado!=""&&password!=""&&email!=""&&phone!=""&&validateEmail(email)==true){
+      var string_mail="Solicitud de registro.\nNOMBRE:"+$("#nombre").val()+" \nAPELLIDOS:"+apellidos+" \nCLIENTE:"+cliente+" \nCAC:"+cac+" \nROL:"+rol+" \nID EMPLEADO:"+id_empleado+" \nPASSWORD:"+password+" \nEMAIL:"+email+" \nTELEFONO:"+phone;
+      console.log(string_mail);
+      var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=32&correo="+string_mail;
+        $.ajax({
+              url: urlGet,
+              success: function(data2)
+              {
+                hidePop();
+              }
+        });
+    }
+    else{
+      $("#caution_text").show();
+    }
+  }
+}
+</script>
+</html>

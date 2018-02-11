@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<div class="cargador">
+</div>
+<style>
+.cargador{
+	/*background-color: black;*/
+	background: url(image/cargando.png) center center / cover no-repeat fixed;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 3;
+}
+</style>
+
+<body style="background: #000;">
+    <div>
+        <img id="imagen_ficha" src="" style="width: 100%;" />
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+    jQuery(window).load(function () {
+      $(".cargador").fadeOut();
+  });
+function oprimir_back(){
+        if(localStorage.from_curso!=0){
+            //var new_url=window.history.previous.href+"#boton_vamos";
+            //alert(new_url);
+            window.location.href=localStorage.from_curso;
+            localStorage.jump=1;
+        }
+        else{
+            window.location.href = "biblioteca.html";
+        }
+       localStorage.from_curso=0;
+    }
+    function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+}
+    $(document).ready(function() {
+      var id = getQueryVariable("id");
+      var urlGet = "https://rest.samsungplus.mx/service.aspx?tipo=12&id="+id;
+      $.ajax({
+          url: urlGet,
+          success: function(data)
+          {
+          if(data!=null){
+            $('#imagen_ficha').attr("src","https://panel.samsungplus.mx/image_academy/media_cursos/"+data);
+
+
+          }
+        }
+    });
+
+    });
+</script>
+</html>

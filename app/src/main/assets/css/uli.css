@@ -1,0 +1,341 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+.body_catalogo{
+    background: url("../image/fondo_catalogo.jpg") center center / cover no-repeat fixed;
+    background-position-y: 0!important;
+    background-color: #00206a;
+
+}
+.body_catalogo_tema{
+    /*background: url("../image/fondo_catalogo.jpg") center center / cover no-repeat fixed;*/
+    background-position-y: 0!important;
+    background-color: #00206a;
+}
+
+.padre_catalogo{
+    position: absolute;
+    background-size: cover!important;
+    width: 100%;
+    z-index: 2;
+}
+
+.hijo_catalogo{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.ul_header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.ul_lado_left{
+    width: 50%;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.ul_lado_right{
+    width: 50%;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -5px;
+    text-align: right;
+}
+
+.ul_puntos{
+    color: #fff;
+    font-size: 9px;
+    padding-right: 5px;
+    vertical-align: middle;
+    font-family: SamsungSharpSans_regular;
+}
+
+.ul_pn_num{
+    color: #fff;
+    font-size: 20px;
+    padding-left: 5px;
+    padding-right: 10px;
+    vertical-align: middle;
+    font-family: SamsungSharpSans_bold;
+}
+
+.ul_img_bar{
+    width: 20px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.ul_logo{
+    width: 73px;
+    padding-left: 5px;
+}
+
+.ul_footer{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 4;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.ul_foot_uno{
+    width: 33.333%;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.ul_foot_dos{
+    width: 33.333%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -5px;
+    text-align: center;
+}
+
+.ul_foot_tres{
+    width: 33.333%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -5px;
+    text-align: center;
+}
+
+.degradado_top{
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 21%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgb(0, 0, 0) 14%,rgb(0, 0, 0) 21%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgb(0, 0, 0) 14%,rgb(0, 0, 0) 21%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+}
+
+.degradado_bottom{
+    pointer-events: none;
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background: -moz-linear-gradient(top, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 21%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgb(0, 0, 0) 14%,rgb(0, 0, 0) 21%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 5%,rgba(0, 0, 0, 0.8) 21%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+}
+
+.ul_encabezado{
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    margin-top: 70px;
+}
+
+.ul_regalo{
+    width: 20px;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.ul_info{
+    width: 12px;
+    padding-right: 5px;
+    vertical-align: sub;
+}
+
+.txt_recompensas{
+    color: #fff;
+    font-size: 12px;
+    font-family: SamsungSharpSans_regular;
+    vertical-align: bottom;
+}
+
+.ul_int_enca{
+    width: 70%;
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 8px;
+}
+
+.ul_int_enca_dos{
+    width: 30%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -5px;
+    position: relative;
+    padding-bottom: 8px;
+    text-align: right;
+}
+
+.ul_circulo{
+    width: 15px;
+    height: 15px;
+    background: #F8FF00;
+    position: absolute;
+    right: -5px;
+    border-radius: 100%;
+    text-align: center;
+    font-family: SamsungSharpSans_bold;
+    font-size: 12px;
+    line-height: 18px;
+    top: -4px;
+}
+
+.logo_telcel{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.logo_telcel img{
+    width: 40%;
+}
+
+.producto{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 25px;
+    padding-top: 10px;
+}
+
+.int_producto{
+    width: 90%;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 8px;
+    text-align: left;
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.titulo_pro{
+    color: #0073c7;
+    font-family: SamsungSharpSans_bold;
+    font-size: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 6px;
+}
+
+.logo_producto{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.logo_producto img{
+    width: 80%;
+}
+
+.circulo_azul{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: #0073c7;
+    position: absolute;
+    top: 53%;
+    left: 5px;
+    text-align: center;
+}
+
+.ul_precio{
+    font-size: 8px;
+    color: #fff;
+    font-family: SamsungSharpSans_regular;
+    line-height: 19px;
+    padding-top: 13px;
+}
+
+.ul_puntos_{
+    font-size: 6px;
+    color: #fff;
+    font-family: SamsungSharpSans_regular;
+    line-height: 0px;
+}
+
+.cont_boton{
+    position: absolute;
+    bottom: -14px;
+    text-align: center;
+    width: 100%;
+}
+
+.btn_ver{
+    width: 80%;
+    height: 25px;
+    border-radius: 40px;
+    background: #000;
+    color: #fff;
+    font-family: SamsungSharpSans_regular;
+}
+
+.producto_dos{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 25px;
+    padding-top: 10px;
+    margin-left: -5px;
+}
+
+.select_cat_uli{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.select_uno_uno{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.select_uno_dos{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -5px;
+}
+
+.selecr_uli{
+    width: 90%;
+    height: 25px;
+    font-size: 10px;
+    border: 1px solid #fff;
+    background: transparent !important;
+    border-radius: 20px;
+    outline: none;
+}
+
+.txt_footer_ul{
+    font-size: 6px;
+    font-family: SamsungSharpSans_regular;
+}
+
+.active_footer{
+    color: #fff;
+}
+
+.inactive_footer{
+    color: #416af5;
+}

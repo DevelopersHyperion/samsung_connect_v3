@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- jQuery library (served from Google) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="js/jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+    <style>
+        .bx-wrapper {
+            -moz-box-shadow: 0 0 5px transparent !important;
+            -webkit-box-shadow: 0 0 5px transparent !important;
+            box-shadow: 0 0 5px transparent !important;
+            border: 5px solid transparent !important;
+            background: transparent !important;
+        }
+
+        .bx-wrapper .bx-pager {
+            text-align: center;
+            font-size: .85em;
+            font-family: Arial;
+            font-weight: bold;
+            color: #666;
+            padding-top: 20px;
+            display: none;
+        }
+
+        .bx-wrapper {
+            position: relative;
+            margin-bottom: 13px;
+            padding: 0;
+            -ms-touch-action: pan-y;
+            touch-action: pan-y;
+        }
+        .footer{
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 53%;
+            top: 85%;
+            position: absolute;
+            z-index: 10000;
+          }
+          .footer li,.footer p{
+            width: 32%;
+            display: inline-block;
+            color: #fff;
+            text-align: center;
+            font-family: "SamsungSharpSans_regular";
+            font-size: 12px;
+          }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+          $('.bxslider').bxSlider({
+            slideWidth: 150,
+            minSlides: 1,
+            maxSlides: 3,
+            slideMargin: 10,
+            controls: false
+          });
+        });
+    </script>
+</head>
+
+<body style="background: #000;">
+<div class="contenido_miperfil">
+    <div class="header" style="background: #000;">
+        <img onclick="app.showMenu();" style="width:20px; margin-left:14px; margin-top:17px;" src="image/menu.png" alt="">
+        <div>
+                <span style="margin-bottom: 10px;">Mis puntos<span> <span style="font-family: SamsungSharpSans_bold; font-size: 18px;" id="muestra_puntos"></span>
+        </div>
+    </div>
+    <div class="cont_miperfil">
+        <div class="buscador_academy">
+            <input type="text" placeholder="Mi perfil" disabled class="search"/>
+        </div>
+
+        <div class="perfil">
+
+            <div class="prefil_uno">
+                <h5 id="nombre">Nombre de usuario</h5>
+                <ul>
+                    <li><p id="cliente"></p></li>
+                    <li><p id="tienda"></p></li>
+                    <li><p id="rol"></p></li>
+                    <li><p id="empleado"></p></li>
+                    <li><p id="email"></p></li>
+                    <li><p id="celular"></p></li>
+                    <li><p id="promedio"></p></li>
+                </ul>
+            </div>
+            <div class="prefil_dos">
+                <a href="mis_puntos_connect.html" style="text-decoration: none;">
+                    <h5>Puntos por venta</h5>
+                    <h5 id="puntos_ventas"style="padding-bottom: 60px;">0</h5>
+                </a>
+                <a href="mis_puntos_connect.html" style="text-decoration: none;">
+                    <h5>Puntos por curso</h5>
+                    <h5 id="puntos_curso"></h5>
+                </a>
+            </div>
+        </div>
+
+        <div class="raya_blanca"></div>
+
+
+        <div class="carrousel">
+            <div style="text-align: left;">
+                <img src="image/logo_academy.png" width="80"/>
+            </div>
+            <div id="load_carrousel">
+
+            </div>
+
+        </div>
+
+
+
+        <div class="raya_blanca"></div>
+
+        <a a href="mailto:samsungplus@rewards.com.mx?subject=Corrección de datos" style="text-decoration: none"><div style="color:white; text-align: center; margin: 20px; font-family: SamsungSharpSans_regular;">¿Tus datos son incorrectos?</div></a>
+
+        <div class="raya_blanca"></div>
+
+        <p class="terminos">Términos y condiciones, Política de privacidad y Código de ética</p>
+    </div>
+</div>
+<div style=""  class="footer">
+    <script>
+        function sendEmail()
+        {
+            window.location = "mailto:samsungplus@rewards.com.mx";
+        }
+        function sendCall(){
+          window.location.href="tel://01-800-433-2000";
+        }
+         function callTerminos(){
+              var carrier=localStorage.getItem("id_carrier");
+              var url_terminos="";
+              if (carrier=="1"){
+                window.location.href="https://panel.samsungplus.mx/terminos/TELCEL.pdf";
+              }
+              else if(carrier=="2"){
+                  window.location.href="https://panel.samsungplus.mx/terminos/MOVISTAR.pdf";
+              }
+              else if(carrier=="3"){
+                  window.location.href="https://panel.samsungplus.mx/terminos/ATT.pdf";
+              }
+            }
+      </script>
+    <div style="margin-top: 32px;font-size: 10px;text-align: right;color: white;">
+        <p style="display: inline;font-size: 8px;">Si quieres actualizar tu información da clic aquí:</p>
+        <p style="display: inline;font-size: 10px;color: rgb(101, 104, 255);" onclick="sendEmail()">samsungplus@rewards.com.mx </p>
+        <p style="display: inline;font-size: 10px;" onclick="sendCall()"></p>
+        <a  id="descarga_terminos" href="#"  style="display: inline;font-size: 10px;    color: #fff;    text-align: center;    font-family: 'SamsungSharpSans_regular';" onclick="callTerminos();">Términos</a>
+    </div>
+</div>
+
+<script>
+
+$( document ).ready(function() {
+
+        var urlLoadBanner = "https://rest.samsungplus.mx/slider_miperfil.aspx?id="+localStorage.id_usuario;
+        $("#load_carrousel").load(urlLoadBanner);
+});
+    function oprimir_back(){
+       window.location.href = "home_academy.html";
+    }
+    //$('.search').after("<img src='image/pencil.png' width='15'/>");
+    $('.search').before("<img src='image/perfil.png' width='15'/>");
+
+    $(document).ready(function(){
+
+
+    	$('#muestra_puntos').html(localStorage.getItem("puntos"));
+    	$('#puntos').html(localStorage.getItem("puntos"));
+
+        var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=23&id="+localStorage.id_usuario;
+
+		$.ajax({
+		  url: urlGet,
+		  success: function(data)
+		  {
+            if(data!=null){
+                var solucion = JSON.parse(data);
+                $('#cliente').html("<b>Cliente: </b>"+ solucion.tienda_nombre);
+                $('#tienda').html("<strong>Tienda: </strong>"+ solucion.sucursal);
+                $('#rol').html("<strong>Rol: </strong>"+ solucion.rol_puesto);
+                $('#empleado').html("<strong>ID de empleado: </strong>"+ solucion.id_empleado);
+                $('#email').html("<strong>Email: </strong>"+ solucion.email);
+                $('#celular').html("<strong>No. de celular: </strong>"+ solucion.celular);
+                $('#nombre').text(solucion.nombre);
+            }
+		  }
+		});
+
+                var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=24&id="+localStorage.id_usuario;
+
+                    $.ajax({
+                        url: urlGet,
+                        success: function(data2)
+                        {
+
+                          if(data2!=null){
+                            $('#puntos_ventas').text(data2);
+                          }
+                        }
+                    });
+                    var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=25&id="+localStorage.id_usuario;
+
+                        $.ajax({
+                            url: urlGet,
+                            success: function(data2)
+                            {
+
+                              if(data2!=null){
+                                $('#puntos_curso').text(data2);
+                              }
+                            }
+                        });
+                        var urlGet="https://rest.samsungplus.mx/service.aspx?tipo=27&id_usuario="+localStorage.id_usuario;
+                        $.ajax({
+                            url: urlGet,
+                            success: function(data3)
+                            {
+
+                              if(data3!=null){
+                                if(data3<60){
+                                }
+                                else if(data3>60&&data3<79){
+                                    $('#promedio').html("<strong>Nivel de aprendizaje: </strong>Asociado");
+                                }
+                                else if(data3>80&&data3<95){
+                                    $('#promedio').html("<strong>Nivel de aprendizaje: </strong>Especialista");
+                                }
+                                else {
+                                    $('#promedio').html("<strong>Nivel de aprendizaje: </strong>Experto");
+                                }
+                                //$('#promedio').html("<strong>Promedio en evaluaciones: </strong>"+data3+"%");
+                              }
+                            }
+                        });
+    });
+
+</script>
+</body>
+</html>

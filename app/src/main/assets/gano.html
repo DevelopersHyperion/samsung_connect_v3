@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- jQuery library (served from Google) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!-- bxSlider Javascript file -->
+    <script src="js/jquery.bxslider.min.js"></script>
+    <!-- bxSlider CSS file -->
+    <link href="css/jquery.bxslider.css" rel="stylesheet" />
+
+    <style>
+        .bx-wrapper {
+            -moz-box-shadow: 0 0 5px transparent !important;
+            -webkit-box-shadow: 0 0 5px transparent !important;
+            box-shadow: 0 0 5px transparent !important;
+            border: 5px solid transparent !important;
+            background: transparent !important;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+          $('.bxslider').bxSlider({
+            slideWidth: 250,
+            minSlides: 1,
+            maxSlides: 2,
+            slideMargin: 10
+          });
+        });
+    </script>
+</head>
+
+<body style="background: #124950;">
+    <div class="contenido_home_academy"></div>
+
+    <div class="cont_encuesta">
+
+        <div class="image_enc">
+            <img src='image/logo_uno.png' width='15'/>
+        </div>
+        <div class="image_text">
+            <p class="txtto" id="titulo">Resultado</p>
+        </div>
+
+        <div class="contenedor_gano">
+            <h1 style="padding-top: 40px; font-family: SamsungSharpSans_bold;" id="felicitacion"></h1>
+            <h1 style="font-size: 25px; color: #00D3D1; padding-top: 40px; font-family:SamsungOne-200; margin-left: 20px; margin-right: 20px;" id="resultado"></h1>
+            <h1 style="font-size: 130px;padding-top: 0px;font-family: SamsungOne-500;" id="puntos"></h1>
+            <h1 style="font-size: 25px; color: #00D3D1; padding-top: 0px; font-family:SamsungOne-200;" id="puntos_texto"></h1>
+            <a href="home_academy.html"><button type="button" style="margin-top: 20px;">Ir a inicio</button></a>
+            <a href="mis_puntos_connect.html"><button type="button" style="margin-top: 10px;">Ver mi perfil</button></a>
+
+
+            <div>
+
+            </div>
+
+        </div>
+
+        <div class="footer_academy">
+            <div class="cont_images_footer"><a href=""><img src='image/logo_uno.png' width='24'/></a></div>
+            <div class="cont_images_footer"><a href=""><img src='image/joistik.png' width='15'/></a></div>
+            <div class="cont_images_footer"><a href=""><img src='image/libro.png' width='20'/></a></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function oprimir_back(){
+            window.location.href = "academy.html";
+        }
+        $(document).ready(function() {
+             var aprovado = localStorage.getItem("aprovado");
+
+
+             if(aprovado == "0"){
+                $('#felicitacion').html("¡ÁNIMO!");
+                $('#resultado').html("Vuelve a intentarlo para obtener puntos.");
+             }else if(aprovado == "1"){
+                // localStorage.puntos = 50 + parseInt(localStorage.getItem("puntos"));
+                $('#felicitacion').html("¡FELICIDADES!");
+                $('#resultado').html("HAS GANADO");
+                $('#puntos').html(localStorage.puntos_curso);
+                $('#puntos_texto').html("PUNTOS");
+             }
+        });
+    </script>
+</body>
+</html>

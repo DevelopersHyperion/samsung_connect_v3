@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=si" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Samsung Plus</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="js/animate.min.css" />
+    <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        body{
+            text-align: center;
+            background: black;
+        }
+        .bg_black{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            background: black;
+            color:white;
+        }
+
+        .bg_white{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            background: white;
+            color:black;
+        }
+
+        .titulo_detalle{
+            font-family: SamsungSharpSans_bold;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .contenido_detalle{
+            font-family: SamsungOne-200;
+            margin-right:20px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+
+    </style>
+    <script src="js/wow.min.js"></script>
+    <script>
+    new WOW().init();
+    function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+}
+function dismiss_popup_cursado(){
+  $('#popup_cursado').css("display", "none");
+}
+$( document ).ready(function() {
+    var id = getQueryVariable("id");
+    var urlLoadCurso = "https://rest.samsungplus.mx/certificacion_template.aspx?id="+id;
+    $("#conte").load(urlLoadCurso);
+    $("#ficha").attr("href","ficha_certificacion.aspx?id="+id);
+
+    var id_usuario = localStorage.getItem("id_usuario");
+    $('#boton_vamos').click(function(){
+      $.ajax({
+
+          url:"https://rest.samsungplus.mx/service.aspx?tipo=20&id_usuario=" + id_usuario + "&id_certificacion=" + id,
+          success: function(data){
+              var aprovado = JSON.parse(data);
+              if( aprovado.aprovado == "1"){
+                $('#popup_cursado').css("display", "flex");
+              }else if(aprovado.aprovado == "0"){
+                window.location.href = "encuesta_certificacion.html?id="+id;
+              }
+          }
+       });
+    });
+});
+
+    </script>
+</head>
+<div class="cargador">
+</div>
+<style>
+.cargador{
+  /*background-color: black;*/
+  margin-top:0%;
+  background: url(image/cargando.png) center center / cover no-repeat fixed;
+  position: fixed;
+  height: 110%;
+  width: 100%;
+  z-index: 3;
+}
+</style>
+
+<body style="background: #000;" onload="loaded();">
+<div id="popup_cursado" class="contenedor_popup">
+    <div class="contenedor_popup_blanco">
+        <div>
+            <div style="font-family: SamsungSharpSans_bold; margin: 15px; ">Haz concluido exitosamente el curso.</div>
+            <div onclick="dismiss_popup_cursado();" class="boton_popup" style="margin-left: 25px;">Aceptar</div>
+        </div>
+    </div>
+</div>
+<div id="popup" class="contenedor_popup">
+    <div class="contenedor_popup_blanco">
+        <div>
+            <div style="font-family: SamsungSharpSans_bold; margin-bottom: 15px; ">¿Estás seguro que deseas salir?</div>
+            <div onclick="a_academy();" class="boton_popup">Aceptar</div>
+            <div onclick="dismiss();" class="boton_popup">Cancelar</div>
+        </div>
+    </div>
+</div>
+<div id="conte" style="">
+</div>
+<div class="imagen_l">
+    <img src="image/final_img.png" style="width: 100%;" />
+    <a id="ficha" href=""><div class="ficha_tecnica_tab">Ver ficha técnica</div></a>
+    <button id="boton_vamos" type="button">¡Vamos!</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        localStorage.setItem("id_capacitacion", "2");
+    });
+
+    function a_academy(){
+        window.history.back();
+    }
+
+    function dismiss(){
+        $('#popup').css("display", "none");
+    }
+
+    function oprimir_back(){
+        $('#popup').css("display", "flex");
+    }
+
+</script>
+<script type="text/javascript">
+  function loaded() {
+    $(".cargador").fadeOut();
+  };
+</script>
+</body>
+</html>

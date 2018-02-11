@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Inicio" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:title="Mi perfil" />
+        <item
+            android:id="@+id/nav_academy"
+            android:title="Samsung Academy" />
+        <item
+            android:id="@+id/nav_plus"
+            android:title="Samsung Plus" />
+    </group>
+
+    <item android:title=" ">
+        <menu>
+            <item
+                android:id="@+id/nav_out"
+                android:title="Cerrar sesión" />
+        </menu>
+    </item>
+
+</menu>
