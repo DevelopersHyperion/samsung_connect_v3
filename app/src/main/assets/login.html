@@ -334,10 +334,84 @@ $('#phone').on('input', function (e) {
             var nstr = str.replace(/\D/g, '');
             $("#phone").val(nstr);
         });
-function validateEmail(email) {
-  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
-}
+
+
+function validador_inputs() {
+            var nombre=$("#nombre").val();
+            var apellidos=$("#apellidos").val();
+            var cliente=$("#cliente").val().replace('&', '');
+            var cac=$("#cac").val();
+            var rol=$("#rol :selected").text();
+            var id_empleado=$("#id_empleado").val();
+            var password=$("#pass").val();
+            var email=$("#email").val();
+            var phone=$("#phone").val();
+
+            var validador_ = true;
+
+            if (id_empleado == '') {
+              $("#caution_text").html('Verifique el campo Id empleado.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (nombre == '') {
+              $("#caution_text").html('Verifique el campo Nombre.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (apellidos == '') {
+              $("#caution_text").html('Verifique el campo Apellido.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (email == '') {
+              $("#caution_text").html('Verifique el campo Email.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (password == '') {
+              $("#caution_text").html('Verifique el campo Password.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (phone == '') {
+              $("#caution_text").html('Verifique el campo Telefono.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (rol == '') {
+              $("#caution_text").html('Verifique el campo Rol.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (cac == '') {
+              $("#caution_text").html('Verifique el campo Carrier.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (cliente == '') {
+              $("#caution_text").html('Verifique el campo Cliente.');
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+            if (!validateEmail(email)) {
+              txt = 'Verifique el campo E-mail: \n';
+              txt += '1.- Que sea válido.\n';
+              txt += '2.-Que no contenga espacios.';
+              $("#caution_text").html(txt);
+              $("#caution_text").show();
+              var validador_ = false;
+            }
+
+            return validador_;
+        }
+
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            return re.test(email);
+        }
+
 function AddData(){
   if($("#condiciones").prop("checked")==false){
     $("#label_condiciones").css("color", "red");
@@ -352,7 +426,7 @@ function AddData(){
 		var password=$("#pass").val();
 		var email=$("#email").val();
 		var phone=$("#phone").val();
-    if(nombre=!""&&apellidos!=""&&cliente!=""&&cac!=""&&rol!=""&&id_empleado!=""&&password!=""&&email!=""&&phone!=""&&validateEmail(email)==true){
+    if(validador_inputs()){
       var string_mail="Solicitud de registro.\nNOMBRE:"+$("#nombre").val()+" \nAPELLIDOS:"+apellidos+" \nCLIENTE:"+cliente+" \nCAC:"+cac+" \nROL:"+rol+" \nID EMPLEADO:"+id_empleado+" \nPASSWORD:"+password+" \nEMAIL:"+email+" \nTELEFONO:"+phone;
       console.log(string_mail);
       var urlGet= "https://rest.samsungplus.mx/service.aspx?tipo=32&correo="+string_mail;
@@ -363,9 +437,6 @@ function AddData(){
                 hidePop();
               }
         });
-    }
-    else{
-      $("#caution_text").show();
     }
   }
 }
