@@ -145,6 +145,9 @@
 </div>
 
 <script type="text/javascript">
+        var num_pregunta=0;
+        var respuesta_usuario;
+        var pregunta;
         function a_academy(){
             window.location.href = "academy.html";
         }
@@ -179,18 +182,14 @@
     }
 
         $(document).ready(function() {
+            $('#muestra_puntos').html(localStorage.getItem("puntos"));
             if(localStorage.getItem("id_usuario")==null){
                 window.location.href = "login.html";
             }
             var aciertos=0;
-            var preguntas_totales;
             // var id_capacitacion = localStorage.getItem("id_capacitacion");
             var id_capacitacion =getQueryVariable("id");
             var id_usuario = localStorage.getItem("id_usuario");
-            //var id_usuario = 1;
-            var id_pregunta = 1;
-            var pregunta_mal = true;
-
             $.ajax({
                 url:"https://rest.samsungplus.mx/service.aspx?tipo=8&id_capacitacion=" + id_capacitacion,
                 success: function(data){
@@ -214,15 +213,19 @@
              });
 
             $.ajax({
-                url:"https://rest.samsungplus.mx/service.aspx?tipo=10&pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion,
+                url:"https://rest.samsungplus.mx/service.aspx?tipo=10&id_capacitacion=" + id_capacitacion,
                 success: function(data){
-                    var pregunta = JSON.parse(data);
-                    $('#pregunta').html(pregunta.pregunta);
-                    $('#respuesta_1').html(pregunta.respuesta_1);
-                    $('#respuesta_2').html(pregunta.respuesta_2);
-                    $('#respuesta_3').html(pregunta.respuesta_3);
-                    $('#respuesta_4').html(pregunta.respuesta_4);
-                    $('#imagen_pregunta').attr("src", "https://panel.samsungplus.mx/image_academy/media_cursos/" + pregunta.imagen);
+                    pregunta = JSON.parse(data);
+                    if(pregunta.length==0){
+                        window.location.href = "home_academy.html";
+                    }
+                    $('#pregunta').html(pregunta[num_pregunta].pregunta);
+                    $('#respuesta_1').html(pregunta[num_pregunta].respuesta_1);
+                    $('#respuesta_2').html(pregunta[num_pregunta].respuesta_2);
+                    $('#respuesta_3').html(pregunta[num_pregunta].respuesta_3);
+                    $('#respuesta_4').html(pregunta[num_pregunta].respuesta_4);
+                    $('#imagen_pregunta').attr("src", "https://panel.samsungplus.mx/image_academy/media_cursos/" + pregunta[num_pregunta].imagen);
+                    respuesta_usuario=pregunta[num_pregunta].respuesta_correcta;
                 }
              });
 
@@ -230,52 +233,27 @@
 
 
             //Al oprimir cambio
-            $('input[type=radio][name=res_uno]').change(function() {                
+            $('input[type=radio][name=res_uno]').click(function() {
                 var respuesta_contestada = this.value;
                 $('input[type=radio][name=res_uno]').prop('disabled', true);
-                //Verifica resultado
-                pregunta_mal = true;
-                $.ajax({
-                    url:"https://rest.samsungplus.mx/service.aspx?tipo=13&respuesta=" + respuesta_contestada + "&id_pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion,
-                    success: function(data){
-
-                        var solucion = JSON.parse(data);
-                        if(solucion.solucion == 1){
-                            var nuevo_id_pregunta = id_pregunta - 1;
-                            $('#circulo_' + nuevo_id_pregunta).attr('class', 'correcta');
-                            aciertos=aciertos+1;
-                            pregunta_mal = false; 
-                        }else if(solucion.solucion == 0){
-                            var nuevo_id_pregunta = id_pregunta - 1;
-                            pregunta_mal = true;                            
-                            $('#circulo_' + nuevo_id_pregunta).attr('class', 'incorrecta');
-                            //POP CANJE
-                            abrir_canje();
-
-                        }
-                    }
-                });
-
-
-                id_pregunta = id_pregunta + 1;
-
-                if(id_pregunta > preguntas_totales){
-                    if(pregunta_mal == true){
-                        //localStorage.setItem("aprovado", "0");                        
-                    }else{
-                        aciertos=aciertos+1;
-                        //localStorage.setItem("aprovado", "1");                        
-                    }
-                    console.log("porcentaje:"+(aciertos/preguntas_totales));
-                    var porcentaje=aciertos/preguntas_totales;
-                    console.log(porcentaje);
-                    if(porcentaje>=0.7){
+                if(respuesta_contestada==respuesta_usuario){
+                    $('#circulo_' + (num_pregunta+1)).attr('class', 'correcta');
+                    aciertos=aciertos+1;
+                }
+                else{
+                   $('#circulo_' + (num_pregunta+1)).attr('class', 'incorrecta');
+                    abrir_canje();
+                }
+                num_pregunta=num_pregunta+1;
+                if(num_pregunta>=10){
+                    var porcentaje=aciertos/(num_pregunta);
+                    if(porcentaje>=0.8){
                         localStorage.setItem("aprovado", "1");
                         $.ajax({
                             url:"https://rest.samsungplus.mx/service.aspx?tipo=14&id_capacitacion=" + id_capacitacion + "&id_usuario=" + id_usuario,
                             success: function(data){
-                            localStorage.puntos=parseInt(localStorage.puntos)+parseInt(data);
-                            localStorage.puntos_curso=data;
+                            localStorage.puntos=parseInt(data)+parseInt(localStorage.puntos.replace(',',''));
+                            localStorage.puntos_curso=parseInt(data);
                             }
                          });
                     }
@@ -290,42 +268,22 @@
                     }
                     $.ajax({
                         url:"https://rest.samsungplus.mx/service.aspx?tipo=26&id_capacitacion=" + id_capacitacion + "&id_usuario=" + id_usuario+"&porcentaje="+porcentaje,
-                        success: function(data){ 
+                        success: function(data){
                             window.location.replace("gano.html");
                         }
                     });
                 }
-                 //Recarga la siguente pregunta
                 else{
-              console.log("https://rest.samsungplus.mx/service.aspx?tipo=15&pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion);
-                $.ajax({
-                    url:"https://rest.samsungplus.mx/service.aspx?tipo=10&pregunta=" + id_pregunta + "&id_capacitacion=" + id_capacitacion,
-                    success: function(data){
-                        var pregunta = JSON.parse(data);
-                        $('#pregunta').html(pregunta.pregunta);
-                        $('#respuesta_1').html(pregunta.respuesta_1);
-                        $('#respuesta_2').html(pregunta.respuesta_2);
-                        $('#respuesta_3').html(pregunta.respuesta_3);
-                        $('#respuesta_4').html(pregunta.respuesta_4);
-                        $('#imagen_pregunta').attr("src", "https://panel.samsungplus.mx/image_academy/media_cursos/" + pregunta.imagen);
-                        //var nuevo_id_pregunta = id_pregunta - 1;
-                        //$('#circulo_' + nuevo_id_pregunta).attr('class', 'correcta');
-                        //id_pregunta = id_pregunta + 1;
-                        $('input[type=radio][name=res_uno]').prop('disabled', false);
-                    }
-                 });
+                    $('input[type=radio][name=res_uno]').prop('disabled', false);
+                    $('input[type=radio][name=res_uno]').prop('checked', false);
+                    $('#pregunta').html(pregunta[num_pregunta].pregunta);
+                    $('#respuesta_1').html(pregunta[num_pregunta].respuesta_1);
+                    $('#respuesta_2').html(pregunta[num_pregunta].respuesta_2);
+                    $('#respuesta_3').html(pregunta[num_pregunta].respuesta_3);
+                    $('#respuesta_4').html(pregunta[num_pregunta].respuesta_4);
+                    $('#imagen_pregunta').attr("src", "https://panel.samsungplus.mx/image_academy/media_cursos/" + pregunta[num_pregunta].imagen);
+                    respuesta_usuario=pregunta[num_pregunta].respuesta_correcta;
                 }
-
-                $(this).prop('checked', false);
-                // if (this.value == '1') {
-                //     alert("Respuesta 1");
-                // }else if (this.value == '2') {
-                //     alert("Respuesta 2");
-                // }else if(this.value == '3'){
-                //     alert("Respuesta 3");
-                // }else if(this.value == '4'){
-                //     alert("Respueta 4");
-                // }
             });
         });
 function salir(){
